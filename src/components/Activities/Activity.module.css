@@ -1,0 +1,33 @@
+.container {
+  margin: 80px 30px;
+}
+
+.topic {
+  text-transform: uppercase;
+}
+
+h3 {
+  font-weight: 400;
+}
+
+.title {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+h3 {
+  font-size: 0.7rem;
+  letter-spacing: 0.1428571429rem;
+}
+
+p {
+  font-size: 0.8rem;
+}
+
+.discover__button {
+  font-size: 0.9rem;
+  text-decoration: none;
+  color: black;
+  border-bottom: 1px solid black;
+  padding: 5px 0;
+}

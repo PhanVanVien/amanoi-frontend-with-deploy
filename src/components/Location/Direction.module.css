@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  background-color: white;
+  justify-content: center;
+  padding: 60px 0;
+}
+
+.container__image {
+  /* display: flex; */
+}
+
+.image {
+}
+
+.direction {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+.location {
+  display: flex;
+}
+
+.direction__text,
+.text {
+  font-size: 0.9rem;
+}
+
+.text {
+  display: flex;
+}

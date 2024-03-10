@@ -1,0 +1,7 @@
+.container {
+  background-color: #fdfaf6;
+}
+
+.activity__container {
+  display: grid;
+}
