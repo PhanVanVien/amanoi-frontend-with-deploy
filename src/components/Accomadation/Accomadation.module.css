@@ -32,3 +32,20 @@ h3 {
   align-items: center;
   width: 55%;
 }
+
+.text__container {
+  margin-top: 30px;
+  margin-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.discover__button {
+  font-size: 0.9rem;
+  text-decoration: none;
+  color: black;
+  border-bottom: 1px solid black;
+  padding: 5px 0;
+}

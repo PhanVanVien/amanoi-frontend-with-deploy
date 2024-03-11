@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./Header.module.css";
 import { CiMenuBurger } from "react-icons/ci";
 import { HiMagnifyingGlass } from "react-icons/hi2";
+import logo from "../../assets/images/logocen.png";
 
 const Header = () => {
   return (
@@ -13,8 +14,7 @@ const Header = () => {
       <div className={styles.logo}>
         <a href="http://localhost:5173/">
           <img
-            src="https://www.aman.com/themes/custom/aman/logo.svg"
-            width={150}
+            src={logo}
             height={40}
           />
         </a>

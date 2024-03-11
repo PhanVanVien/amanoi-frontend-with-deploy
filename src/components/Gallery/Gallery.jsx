@@ -1,31 +1,84 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Gallery.module.css";
+import { IoCloseOutline } from "react-icons/io5";
+import {
+  addRoom,
+  deleteImageFromGallery,
+  getGallery,
+} from "../Utils/ApiFunctions";
+import { toast } from "react-toastify";
+import CustomButton from "../Common/CustomButton";
 
 const Gallery = () => {
+  const baseURL = "http://localhost:8080/image/fileSystem/";
+  const [gallery, setGallery] = useState([]);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const data = await getGallery();
+      setGallery(data);
+    } catch (error) {
+      console.error("Error fetching gallery data:", error);
+    }
+  };
+  const [image, setImage] = useState();
+
+  const handleImageChange = (e) => {
+    setImage(e.target.files[0]);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await addRoom(image);
+      if (response !== undefined) {
+        toast.success("Add image successful");
+        fetchData();
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
+  const handleDelete = async (name) => {
+    try {
+      const response = await deleteImageFromGallery(name);
+      if (response !== undefined) {
+        toast.success("Delete image successful");
+        fetchData();
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
   return (
-    <div className={styles.container}>
-      <div className={styles.box}>
-        <img src="https://images.pexels.com/photos/1174732/pexels-photo-1174732.jpeg?auto=compress&cs=tinysrgb&w=600"></img>
+    <>
+      <form onSubmit={handleSubmit}>
+        <input type="file" onChange={handleImageChange} />
+        <button type="submit">Click me</button>
+      </form>
+      <h1 className={styles.title}>Explore Amanoi</h1>
+      <CustomButton title="Upload Image" />
+      <div className={styles.container}>
+        {gallery.map((item, index) => (
+          <div className={styles.box} key={index}>
+            <img
+              className={styles.image}
+              src={`${baseURL}${item}`}
+              alt={`Image ${index + 1}`}
+            />
+            <div className={styles.delete} onClick={() => handleDelete(item)}>
+              <IoCloseOutline size={24} />
+            </div>
+          </div>
+        ))}
       </div>
-      <div className={styles.box}>
-        <img src="https://images.pexels.com/photos/1005417/pexels-photo-1005417.jpeg?auto=compress&cs=tinysrgb&w=600"></img>
-      </div>
-      <div className={styles.box}>
-        <img src="https://images.pexels.com/photos/1056497/pexels-photo-1056497.jpeg?auto=compress&cs=tinysrgb&w=600"></img>
-      </div>
-      <div className={styles.box}>
-        <img src="https://images.pexels.com/photos/386000/pexels-photo-386000.jpeg?auto=compress&cs=tinysrgb&w=600"></img>
-      </div>
-      <div className={styles.box}>
-        <img src="https://images.pexels.com/photos/3601425/pexels-photo-3601425.jpeg?auto=compress&cs=tinysrgb&w=600"></img>
-      </div>
-      <div className={styles.box}>
-        <img src="https://images.pexels.com/photos/279574/pexels-photo-279574.jpeg?auto=compress&cs=tinysrgb&w=600"></img>
-      </div>
-      <div className={styles.box}>
-        <img src="https://images.pexels.com/photos/2964163/pexels-photo-2964163.jpeg?auto=compress&cs=tinysrgb&w=600"></img>
-      </div>
-    </div>
+    </>
   );
 };
 

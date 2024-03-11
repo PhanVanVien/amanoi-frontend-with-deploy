@@ -7,6 +7,7 @@ import Nav from "../Nav/Nav";
 import VideoPlayer from "../VideoPlayer/VideoPlayer";
 import CarouselImage from "../Carousel/CarouselImage";
 import Accomadation from "../Accomadation/Accomadation";
+import Galery from "../Gallery/Gallery";
 
 const HomePage = () => {
   return (
@@ -19,6 +20,7 @@ const HomePage = () => {
       <Activities />
       <LocationInfo />
       <Footer />
+      <Galery />
     </>
   );
 };

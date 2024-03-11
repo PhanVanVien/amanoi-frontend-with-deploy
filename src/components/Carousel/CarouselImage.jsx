@@ -1,12 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import styles from "./CarouselImage.module.css";
+import { getGallery } from "../Utils/ApiFunctions";
 
 const CarouselImage = () => {
+  const baseURL = "http://localhost:8080/image/fileSystem/";
+  const [image, setImage] = useState([]);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const data = await getGallery();
+      console.log(data);
+      setImage(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  console.log(image);
+
   return (
     <Carousel
-      //   className={styles.item__container}
       additionalTransfrom={0}
       arrows
       autoPlaySpeed={3000}
@@ -29,14 +48,14 @@ const CarouselImage = () => {
           items: 4,
           partialVisibilityGutter: 40,
         },
-        mobile: {
-          breakpoint: { max: 464, min: 0 },
-          items: 1,
-          partialVisibilityGutter: 30,
-        },
         tablet: {
           breakpoint: { max: 1024, min: 464 },
           items: 2,
+          partialVisibilityGutter: 30,
+        },
+        mobile: {
+          breakpoint: { max: 464, min: 0 },
+          items: 1,
           partialVisibilityGutter: 30,
         },
       }}
@@ -49,78 +68,11 @@ const CarouselImage = () => {
       slidesToSlide={1}
       swipeable
     >
-      <div className={styles.item}>
-        <img
-          src="https://www.aman.com/sites/default/files/styles/central_carousel_large/public/2023-04/Amanoi%2C%20Vietnam%20-%20Amanoi%20Ocean%20Pool%20Villa%2034a.jpg?itok=d0AL-aNp"
-          width={250}
-        ></img>
-      </div>
-      <div className={styles.item}>
-        <img
-          src="https://www.aman.com/sites/default/files/styles/central_carousel_large/public/2021-03/Amanoi_Gallery_7.jpg?itok=oGDGFYeE"
-          width={250}
-        ></img>
-      </div>
-      <div className={styles.item}>
-        <img
-          src="https://www.aman.com/sites/default/files/styles/central_carousel_large/public/2021-03/Amanoi_Gallery_8.jpg?itok=K_EVTG3m"
-          width={250}
-        ></img>
-      </div>
-      <div className={styles.item}>
-        <img
-          src="https://www.aman.com/sites/default/files/styles/central_carousel_large/public/2021-03/Amanoi_Gallery_9.jpg?itok=dxVcajx-"
-          width={250}
-        ></img>
-      </div>
-      <div className={styles.item}>
-        <img
-          src="https://www.aman.com/sites/default/files/styles/central_carousel_large/public/2021-03/Amanoi_Gallery_10.jpg?itok=Wy_X6INQ"
-          width={250}
-        ></img>
-      </div>
-      <div className={styles.item}>
-        <img
-          src="https://www.aman.com/sites/default/files/styles/central_carousel_large/public/2021-03/Amanoi_Gallery_6.jpg?itok=KVG5jV3Q"
-          width={250}
-        ></img>
-      </div>
-      <div className={styles.item}>
-        <img
-          src="https://www.aman.com/sites/default/files/styles/central_carousel_large/public/2023-04/Amanoi%2C%20Vietnam%20-%20Amanoi%20Ocean%20Pool%20Villa%2034a.jpg?itok=d0AL-aNp"
-          width={250}
-        ></img>
-      </div>
-      <div className={styles.item}>
-        <img
-          src="https://www.aman.com/sites/default/files/styles/central_carousel_large/public/2021-03/Amanoi_Gallery_7.jpg?itok=oGDGFYeE"
-          width={250}
-        ></img>
-      </div>
-      <div className={styles.item}>
-        <img
-          src="https://www.aman.com/sites/default/files/styles/central_carousel_large/public/2021-03/Amanoi_Gallery_8.jpg?itok=K_EVTG3m"
-          width={250}
-        ></img>
-      </div>
-      <div className={styles.item}>
-        <img
-          src="https://www.aman.com/sites/default/files/styles/central_carousel_large/public/2021-03/Amanoi_Gallery_9.jpg?itok=dxVcajx-"
-          width={250}
-        ></img>
-      </div>
-      <div className={styles.item}>
-        <img
-          src="https://www.aman.com/sites/default/files/styles/central_carousel_large/public/2021-03/Amanoi_Gallery_10.jpg?itok=Wy_X6INQ"
-          width={250}
-        ></img>
-      </div>
-      <div className={styles.item}>
-        <img
-          src="https://www.aman.com/sites/default/files/styles/central_carousel_large/public/2021-03/Amanoi_Gallery_6.jpg?itok=KVG5jV3Q"
-          width={250}
-        ></img>
-      </div>
+      {image.map((item, index) => (
+        <div className={styles.item} key={index}>
+          <img src={`${baseURL}${item}`} width={250}></img>
+        </div>
+      ))}
     </Carousel>
   );
 };
