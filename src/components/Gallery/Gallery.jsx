@@ -8,6 +8,8 @@ import {
 } from "../Utils/ApiFunctions";
 import { toast } from "react-toastify";
 import CustomButton from "../Common/CustomButton";
+import { FiUpload } from "react-icons/fi";
+import Modal from "../Common/Modal";
 
 const Gallery = () => {
   const baseURL = "http://localhost:8080/image/fileSystem/";
@@ -56,27 +58,56 @@ const Gallery = () => {
     }
   };
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState("");
+
+  const openModal = (content) => {
+    setIsModalOpen(true);
+    setModalContent(content);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <input type="file" onChange={handleImageChange} />
-        <button type="submit">Click me</button>
-      </form>
-      <h1 className={styles.title}>Explore Amanoi</h1>
-      <CustomButton title="Upload Image" />
-      <div className={styles.container}>
-        {gallery.map((item, index) => (
-          <div className={styles.box} key={index}>
-            <img
-              className={styles.image}
-              src={`${baseURL}${item}`}
-              alt={`Image ${index + 1}`}
-            />
-            <div className={styles.delete} onClick={() => handleDelete(item)}>
-              <IoCloseOutline size={24} />
+      <Modal
+        isModalOpen={isModalOpen}
+        modalContent={modalContent}
+        onClose={closeModal}
+        onSubmit={handleSubmit}
+        onChange={handleImageChange}
+      />
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <h1 className={styles.title}>Explore Amanoi</h1>
+        <CustomButton
+          title="Upload Image"
+          icon={FiUpload}
+          size={24}
+          onClick={() => openModal("Upload Image")}
+        />
+        <div className={styles.container}>
+          {gallery.map((item, index) => (
+            <div className={styles.box} key={index}>
+              <img
+                className={styles.image}
+                src={`${baseURL}${item}`}
+                alt={`Image ${index + 1}`}
+              />
+              <div className={styles.delete} onClick={() => handleDelete(item)}>
+                <IoCloseOutline size={24} />
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </>
   );
