@@ -14,16 +14,6 @@ const Footer = () => {
     <div className={styles.container}>
       <img height={30} src={logo}></img>
       <div className={styles.contact__container}>
-        {/* <div className={styles.contact}>
-          <a href="https://www.linkedin.com/in/phan-van-vien-03625b227/">
-            <FaLinkedinIn size={28} style={{ color: "black" }} />
-          </a>
-        </div>
-        <div className={styles.contact}>
-          <a href="https://github.com/PhanVanVien">
-            <FaGithub size={28} style={{ color: "black" }} />
-          </a>
-        </div> */}
         <div className={styles.delete}>
           <a
             href="https://www.linkedin.com/in/phan-van-vien-03625b227/"

@@ -5,7 +5,7 @@ import Direction from "./Direction";
 
 const LocationInfo = () => {
   return (
-    <div>
+    <div style={{ flex: 1 }}>
       <Location />
       <Direction />
     </div>

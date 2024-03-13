@@ -1,4 +1,74 @@
 .container {
   position: sticky;
   top: 0;
+  display: flex;
+  justify-content: center;
+  background-color: #f3eee7;
+  border-top: 1px solid #dad9d7;
+  border-bottom: 1px solid #dad9d7;
+  z-index: 1;
+}
+
+.menu {
+  display: flex;
+  justify-content: center;
+}
+
+.item {
+  display: flex;
+  margin: 0 10px;
+}
+
+.brand {
+  font-weight: 400;
+  font-size: 0.9rem;
+  letter-spacing: 0.1428571429rem;
+}
+
+.brand {
+  text-decoration: none;
+  color: black;
+  margin-right: 5px;
+}
+
+.index {
+  text-decoration: none;
+  color: black;
+  font-size: 0.85rem;
+}
+
+.index,
+.index:link,
+.index:visited {
+  position: relative;
+  padding-bottom: 4px;
+}
+
+.index::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  background-image: linear-gradient(90deg, black, black);
+  background-size: 0 1px;
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  transition: background-size 0.3s ease-in;
+}
+
+.index:hover::before {
+  background-size: 100% 1px;
+}
+
+.active {
+  padding-bottom: 4px;
+  content: "";
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  background-image: linear-gradient(90deg, black, black);
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: left bottom;
 }

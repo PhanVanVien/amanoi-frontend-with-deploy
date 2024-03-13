@@ -12,15 +12,11 @@ import Galery from "../Gallery/Gallery";
 const HomePage = () => {
   return (
     <>
-      <Header />
-      <Nav />
       <VideoPlayer />
       <CarouselImage />
       <Accomadation />
       <Activities />
       <LocationInfo />
-      <Footer />
-      <Galery />
     </>
   );
 };

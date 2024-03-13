@@ -1,3 +1,27 @@
 #root {
   margin: 0;
 }
+
+.scroll-top-button {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  z-index: 99;
+  width: 40px;
+  height: 40px;
+  border: none;
+  outline: none;
+  background-color: #f6f6f6;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  width: 40px;
+  cursor: pointer;
+  height: 40px;
+}
+
+.scroll-top-button:hover {
+  background-color: #bfbfbf;
+}

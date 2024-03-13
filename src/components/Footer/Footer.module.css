@@ -3,14 +3,14 @@
   background-color: #ffffff;
   display: flex;
   justify-content: space-between;
-  padding: 60px 100px;
+  align-items: center;
+  padding: 20px 100px;
 }
 
 .contact {
   border-radius: 50%;
   width: 45px;
   height: 45px;
-  margin: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -30,7 +30,6 @@
   border-radius: 50%;
   width: 45px;
   height: 45px;
-  margin: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -38,6 +37,5 @@
 }
 
 .delete:hover {
-  /* opacity: 0.7; */
   background-color: #ebe8e5;
 }
