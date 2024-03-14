@@ -2,8 +2,9 @@ import React from "react";
 import styles from "./Nav.module.css";
 import { NavLink } from "react-router-dom";
 import navigation from "./navigation.json";
+import { withNamespaces } from "react-i18next";
 
-const Nav = () => {
+const Nav = ({ t }) => {
   return (
     <div className={styles.container}>
       <ul className={styles.menu}>
@@ -21,7 +22,7 @@ const Nav = () => {
           </NavLink>
         </li>
         {navigation.map((item, index) => (
-          <li className={styles.item}>
+          <li className={styles.item} key={index}>
             <NavLink
               className={styles.index}
               aria-current="page"
@@ -43,7 +44,7 @@ const Nav = () => {
               }}
               onClick={() => (document.title = item.helmet)}
             >
-              {item.title}
+              {t(item.title)}
             </NavLink>
           </li>
         ))}
@@ -52,4 +53,4 @@ const Nav = () => {
   );
 };
 
-export default Nav;
+export default withNamespaces()(Nav);

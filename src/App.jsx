@@ -1,5 +1,4 @@
 import "./App.css";
-import AddGalery from "./components/Gallery/AddGalery";
 import Gallery from "./components/Gallery/Gallery";
 import HomePage from "./components/Home/HomePage";
 import { ToastContainer } from "react-toastify";
@@ -8,7 +7,10 @@ import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Nav from "./components/Nav/Nav";
 import Footer from "./components/Footer/Footer";
+import { withNamespaces } from "react-i18next";
 import { IoArrowUp } from "react-icons/io5";
+import { useEffect } from "react";
+import i18n from "./i18n";
 
 function App() {
   const scrollToTop = () => {
@@ -17,12 +19,13 @@ function App() {
       behavior: "smooth",
     });
   };
+
+  useEffect(() => {
+    i18n.changeLanguage("en");
+  }, []);
+
   return (
     <div className="container">
-      {/* Same as */}
-      {/* <AddGalery /> */}
-      {/* <Gallery /> */}
-      {/* <HomePage /> */}
       <Header />
       <Nav />
       <Routes>
@@ -32,11 +35,10 @@ function App() {
       <Footer />
       <ToastContainer />
       <button onClick={scrollToTop} className="scroll-top-button">
-        {/* <IoIosArrowUp /> */}
         <IoArrowUp size={24} />
       </button>
     </div>
   );
 }
 
-export default App;
+export default withNamespaces()(App);

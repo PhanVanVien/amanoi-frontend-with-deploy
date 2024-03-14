@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import styles from "./CarouselImage.module.css";
-import { getGallery } from "../Utils/ApiFunctions";
+import { getGallery } from "../Utils/ApiFunctions.js";
 
 const CarouselImage = () => {
   const baseURL = "http://localhost:8080/image/fileSystem/";

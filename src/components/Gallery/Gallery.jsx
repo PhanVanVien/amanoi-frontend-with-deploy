@@ -5,13 +5,15 @@ import {
   addRoom,
   deleteImageFromGallery,
   getGallery,
-} from "../Utils/ApiFunctions";
+} from "../Utils/ApiFunctions.js";
 import { toast } from "react-toastify";
 import CustomButton from "../Common/CustomButton";
 import { FiUpload } from "react-icons/fi";
 import Modal from "../Common/Modal";
 
-const Gallery = () => {
+import { withNamespaces } from "react-i18next";
+
+const Gallery = ({ t }) => {
   const baseURL = "http://localhost:8080/image/fileSystem/";
   const [gallery, setGallery] = useState([]);
 
@@ -87,12 +89,12 @@ const Gallery = () => {
           alignItems: "center",
         }}
       >
-        <h1 className={styles.title}>Explore Amanoi</h1>
+        <h1 className={styles.title}>{t("Explore")}</h1>
         <CustomButton
-          title="Upload Image"
+          title={t("Upload Image")}
           icon={FiUpload}
           size={24}
-          onClick={() => openModal("Upload Image")}
+          onClick={() => openModal(t("Upload Image"))}
         />
         <div className={styles.container}>
           {gallery.map((item, index) => (
@@ -113,4 +115,4 @@ const Gallery = () => {
   );
 };
 
-export default Gallery;
+export default withNamespaces()(Gallery);

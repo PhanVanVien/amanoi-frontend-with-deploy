@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { addRoom } from "../Utils/ApiFunctions";
+import { addRoom } from "../Utils/ApiFunctions.js";
 import { toast } from "react-toastify";
 
 const AddGalery = () => {
@@ -16,9 +16,11 @@ const AddGalery = () => {
       console.log(response);
       if (response !== undefined) {
         toast.success("Add image successful");
+      } else {
+        toast.error(response.data.message);
       }
     } catch (error) {
-      toast.error(error.message);
+      toast.error("Error uploading image: " + error);
     }
   };
 
