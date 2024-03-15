@@ -58,12 +58,10 @@
 
 .upload {
   border-right: 1px solid white;
-  /* border-radius: 0 0 0 15px; */
 }
 
 .cancel {
   border-left: 1px solid white;
-  /* border-radius: 0 0 15px 0; */
 }
 
 .image__container {

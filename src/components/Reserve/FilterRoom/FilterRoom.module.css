@@ -1,0 +1,22 @@
+.container {
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  padding: 10px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  font-size: 0.9rem;
+}
+
+.filter {
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.filter_dropdown {
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}

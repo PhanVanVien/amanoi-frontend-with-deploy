@@ -11,6 +11,7 @@ import { withNamespaces } from "react-i18next";
 import { IoArrowUp } from "react-icons/io5";
 import { useEffect } from "react";
 import i18n from "./i18n";
+import Reserve from "./components/Reserve/Reserve";
 
 function App() {
   const scrollToTop = () => {
@@ -31,6 +32,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/gallery" element={<Gallery />} />
+        <Route path="/reserve" element={<Reserve />} />
       </Routes>
       <Footer />
       <ToastContainer />

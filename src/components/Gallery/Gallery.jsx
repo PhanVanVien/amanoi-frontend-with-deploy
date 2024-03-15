@@ -90,12 +90,12 @@ const Gallery = ({ t }) => {
         }}
       >
         <h1 className={styles.title}>{t("Explore")}</h1>
-        <CustomButton
+        {/* <CustomButton
           title={t("Upload Image")}
           icon={FiUpload}
           size={24}
           onClick={() => openModal(t("Upload Image"))}
-        />
+        /> */}
         <div className={styles.container}>
           {gallery.map((item, index) => (
             <div className={styles.box} key={index}>
@@ -104,9 +104,9 @@ const Gallery = ({ t }) => {
                 src={`${baseURL}${item}`}
                 alt={`Image ${index + 1}`}
               />
-              <div className={styles.delete} onClick={() => handleDelete(item)}>
+              {/* <div className={styles.delete} onClick={() => handleDelete(item)}>
                 <IoCloseOutline size={24} />
-              </div>
+              </div> */}
             </div>
           ))}
         </div>

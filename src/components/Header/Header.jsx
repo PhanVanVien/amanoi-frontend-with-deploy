@@ -7,6 +7,7 @@ import "./style.css";
 import { LanguageContext } from "../Utils/LanguageContext";
 import { withNamespaces } from "react-i18next";
 import i18n from "../../i18n";
+import { Link } from "react-router-dom";
 
 const Header = ({ t }) => {
   const changeLanguage = (lng) => {
@@ -36,9 +37,9 @@ const Header = ({ t }) => {
             {t("Vietnamese")}
           </option>
         </select>
-        <a href="">
+        <Link to="/reserve">
           <button className={styles.button}>{t("Reserve")}</button>
-        </a>
+        </Link>
       </div>
     </div>
   );

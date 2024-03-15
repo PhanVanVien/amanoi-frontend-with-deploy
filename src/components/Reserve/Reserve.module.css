@@ -1,0 +1,32 @@
+.parallax {
+  margin-top: 30px;
+  background-image: url("../../assets/images/parallax.jpg");
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 60vh;
+  position: relative;
+}
+
+.title {
+  font-size: 1.4rem;
+}
+
+.contact {
+  justify-content: center;
+  padding: 10px 20px;
+  background-color: rgba(243, 238, 231, 0.7); /* Using rgba for transparency */
+  backdrop-filter: blur(1px); /* Optional: adds a blur effect */
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  bottom: 0;
+  left: 150px;
+}
+
+.contactInfo {
+  display: flex;
+  align-items: center;
+  font-size: 0.8rem;
+}

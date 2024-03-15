@@ -1,0 +1,74 @@
+.container {
+  padding: 20px;
+  margin-top: 20px;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 20px;
+}
+
+.content {
+  font-size: 0.9rem;
+}
+
+.additional_content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.left_additional {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.main_content {
+  border-bottom: 1px solid#cccccc;
+}
+
+.area {
+  margin: 15px 0;
+  font-size: 0.8rem;
+}
+
+.name {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.link {
+  margin: 15px 0;
+  text-decoration: underline;
+  text-decoration-color: #cccccc; /* Change to the color you desire */
+}
+
+.breakfast {
+  font-weight: bold;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.bonus {
+  font-size: 0.8rem;
+}
+
+.cost {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.night,
+.tax {
+  font-size: 0.8rem;
+}
+
+.tax {
+  color: #666666;
+}
+
+.button_container {
+  margin-top: 15px;
+}

@@ -8,3 +8,13 @@ body {
   background-color: #f3eee7;
   font-family: "Montserrat", sans-serif;
 }
+
+
+.parallax {
+  background-image: url("./assets/images/parallax.jpg");
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 50vh;
+}
