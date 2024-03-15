@@ -1,0 +1,56 @@
+.accommodation {
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+}
+
+.option {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.cell {
+  padding: 10px 10px;
+  border-bottom: 1px solid #cccccc;
+  cursor: pointer;
+}
+
+.code {
+  font-size: 0.9rem;
+  padding: 10px 10px;
+  display: flex;
+}
+
+.promo {
+  display: none;
+}
+
+.option_container {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.option_text {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.filter_dropdown {
+  font-size: 0.9rem;
+  padding: 10px;
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+  cursor: pointer;
+}

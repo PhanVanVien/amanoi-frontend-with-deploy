@@ -1,11 +1,10 @@
 import React from "react";
-import styles from "./Reserve.module.css";
+import styles from "./Parallax.module.css";
 import { FaBuilding } from "react-icons/fa";
 import { FaPhoneAlt } from "react-icons/fa";
 import { FaLink } from "react-icons/fa";
-import Room from "./Room/Room";
 
-const Reserve = () => {
+const Parallax = () => {
   return (
     <>
       <div className={styles.parallax}>
@@ -27,9 +26,8 @@ const Reserve = () => {
           </span>
         </div>
       </div>
-      <Room />
     </>
   );
 };
 
-export default Reserve;
+export default Parallax;

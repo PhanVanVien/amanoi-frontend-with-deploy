@@ -17,8 +17,7 @@
 }
 
 .right__container {
-  display: flex;
-  justify-content: flex-end;
+  float: right;
   margin-right: 20px;
 }
 

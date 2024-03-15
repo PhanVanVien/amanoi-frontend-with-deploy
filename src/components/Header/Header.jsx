@@ -19,13 +19,6 @@ const Header = ({ t }) => {
       <div className={styles.left__container}>
         <CiMenuBurger size={28} /> <a style={{ marginLeft: "28px" }}>Menu</a>{" "}
         <HiMagnifyingGlass style={{ marginLeft: "50px" }} size={20} />
-      </div>
-      <div className={styles.logo}>
-        <a href="http://localhost:5173/">
-          <img src={logo} height={40} />
-        </a>
-      </div>
-      <div className={styles.right__container}>
         <select
           className={styles.language__container}
           onChange={(e) => changeLanguage(e.target.value)}
@@ -37,6 +30,24 @@ const Header = ({ t }) => {
             {t("Vietnamese")}
           </option>
         </select>
+      </div>
+      <div className={styles.logo}>
+        <a href="http://localhost:5173/">
+          <img src={logo} height={40} />
+        </a>
+      </div>
+      <div className={styles.right__container}>
+        <div className="dropdown">
+          <button className="dropbtn" style={{ marginRight: "20px" }}>
+            Account
+          </button>
+          <div className="dropdown-content">
+            <Link to={"/login"}>Login</Link>
+            <Link to={"/admin"}>Administration</Link>
+            <Link to={"/logout"}>Logout</Link>
+          </div>
+        </div>
+
         <Link to="/reserve">
           <button className={styles.button}>{t("Reserve")}</button>
         </Link>

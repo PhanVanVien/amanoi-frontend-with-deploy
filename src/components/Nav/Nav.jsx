@@ -48,6 +48,7 @@ const Nav = ({ t }) => {
             </NavLink>
           </li>
         ))}
+        
       </ul>
     </div>
   );

@@ -1,0 +1,50 @@
+.form_reservation {
+  background-color: #fdfaf6;
+  border: 1px solid black;
+  padding: 20px 20px;
+  position: sticky;
+  top: 78px;
+}
+
+.form_check {
+  margin-bottom: 20px;
+}
+
+.title_reservation {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+.date {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 20px 0;
+}
+
+.hour {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+}
+
+.total {
+  padding: 20px 0;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+}
+
+.total_title {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.information {
+  padding-top: 20px;
+}
+.information_item {
+  margin-top: 20px;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
