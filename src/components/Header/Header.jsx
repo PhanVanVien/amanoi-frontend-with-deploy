@@ -3,7 +3,7 @@ import styles from "./Header.module.css";
 import { CiMenuBurger } from "react-icons/ci";
 import { HiMagnifyingGlass } from "react-icons/hi2";
 import logo from "../../assets/images/logocen.png";
-import "./style.css";
+// import "./style.css";
 import { LanguageContext } from "../Utils/LanguageContext";
 import { withNamespaces } from "react-i18next";
 import i18n from "../../i18n";
@@ -42,8 +42,10 @@ const Header = ({ t }) => {
             Account
           </button>
           <div className="dropdown-content">
-            <Link to={"/login"}>Login</Link>
-            <Link to={"/admin"}>Administration</Link>
+            <Link to={"/login"} onClick={() => (document.title = "Login")}>
+              Login
+            </Link>
+            <Link to={"/admin"} onClick={() => (document.title = "Admin")}>Administration</Link>
             <Link to={"/logout"}>Logout</Link>
           </div>
         </div>

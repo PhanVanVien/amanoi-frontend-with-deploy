@@ -12,9 +12,6 @@ const Room = () => {
         <SearchRoom />
         <FilterRoom />
         <RoomItem />
-        <RoomItem />
-        <RoomItem />
-        <RoomItem />
       </div>
       <DetailReserve />
     </div>

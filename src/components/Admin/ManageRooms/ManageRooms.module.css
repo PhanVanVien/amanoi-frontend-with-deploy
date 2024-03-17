@@ -1,0 +1,49 @@
+.addbtn {
+  border: none;
+  background-color: transparent;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.1rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin: 10px 0;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #fff;
+}
+
+tr:nth-child(odd) {
+  background-color: #f4f4f4;
+}
+
+th {
+  background-color: #313131;
+  color: white;
+}
+
+.actionbtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  color: white;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  text-align: center;
+  border: none;
+  background-color: #313131;
+}

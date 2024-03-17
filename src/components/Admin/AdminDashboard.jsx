@@ -1,19 +1,19 @@
 import React, { useState, useEffect, useRef } from "react";
 import styles from "./AdminDashboard.module.css";
 import { IoIosArrowDown } from "react-icons/io";
-import Parallax from "../Common/Parallax";
 import ManageRooms from "./ManageRooms/ManageRooms";
 import ManageReservations from "./ManageReservations/ManageReservations";
 import ManageGallery from "./ManageGallery/ManageGallery";
 import ManageUsers from "./ManageUsers/ManageUsers";
 import { IoIosArrowUp } from "react-icons/io";
+import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 
 const AdminDashboard = () => {
   const [manageRooms, setManageRooms] = useState(true);
   const [manageReservations, setManageReservations] = useState(false);
   const [manageGallery, setManageGallery] = useState(false);
   const [manageUsers, setManageUsers] = useState(false);
-  const [selectedSection, setSelectedSection] = useState("Manage");
+  const [selectedSection, setSelectedSection] = useState("Rooms");
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -64,13 +64,23 @@ const AdminDashboard = () => {
     <>
       <div className={styles.container}>
         <div className={styles.title_select}>
-          <span className={styles.title}>Admin Panel</span>
+          <span className={styles.title}>
+            Admin Panel
+            <MdOutlineKeyboardArrowRight
+              color={"#909090"}
+              size={20}
+              style={{ margin: "0px 10px" }}
+            />
+            <span className={styles.nav}>Manage</span>
+            <MdOutlineKeyboardArrowRight
+              color={"#909090"}
+              size={20}
+              style={{ margin: "0px 10px" }}
+            />
+            <span className={styles.nav}>{selectedSection}</span>
+          </span>
           <div className={styles.dropdown} ref={dropdownRef}>
-            <button
-              className={styles.dropbtn}
-              style={{ marginRight: "20px" }}
-              onClick={handleOpen}
-            >
+            <button className={styles.dropbtn} onClick={handleOpen}>
               <span style={{ marginRight: "10px" }}>{selectedSection}</span>
               {open ? <IoIosArrowUp /> : <IoIosArrowDown />}
             </button>

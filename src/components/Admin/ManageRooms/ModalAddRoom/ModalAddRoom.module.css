@@ -1,0 +1,143 @@
+.container {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.modal {
+  display: flex;
+}
+
+.modal_content {
+  border: 1px solid #fff;
+  width: 500px;
+  background-color: #fff;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.close {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  width: 35px;
+  height: 35px;
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}
+
+.title {
+  font-weight: 400;
+  font-size: 1.8rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+.button__group {
+  margin: 0 5px 5px 5px;
+  display: flex;
+  text-align: center;
+}
+
+.button {
+  background-color: black;
+  color: white;
+  padding: 10px 20px;
+  cursor: pointer;
+  flex: 1;
+}
+
+.image__container {
+  width: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-left: 1px solid #f2f2f2;
+  background-color: white;
+}
+
+.image__zone {
+  margin: 20px;
+  height: 400px;
+}
+
+.upload {
+  /* border-right: 1px solid white; */
+  margin-right: 2.5px;
+}
+
+.cancel {
+  /* border-left: 1px solid white; */
+  margin-left: 2.5px;
+}
+
+.input_group {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 10px;
+  margin: 0 20px;
+}
+
+.label {
+  margin-right: 10px;
+  font-weight: 400;
+  color: #808080;
+  font-weight: 600;
+}
+
+.input {
+  border: 1px solid #808080;
+  border-radius: 5px;
+  outline: none;
+  padding: 10px 10px;
+  font-size: 1rem;
+  font-family: "Montserrat", sans-serif;
+}
+
+.input__container {
+  margin: 0 20px 10px 20px;
+}
+
+.input__group {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.input__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+textarea {
+  resize: none;
+}
+
+.inputfile {
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+}
+
+.inputfile + label {
+  font-size: 1rem;
+  font-weight: 400;
+  color: white;
+  background-color: black;
+  display: inline-block;
+  padding: 10px 20px;
+}
+
+.inputfile + label {
+  cursor: pointer;
+}

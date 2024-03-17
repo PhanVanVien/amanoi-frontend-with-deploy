@@ -1,5 +1,7 @@
 .title {
   font-size: 1.8rem;
+  display: flex;
+  align-items: center;
 }
 
 .container {
@@ -79,4 +81,8 @@
 .dropdown_content {
   display: flex;
   flex-direction: column;
+}
+
+.nav {
+  font-size: 0.9rem;
 }

@@ -41,3 +41,48 @@ export async function deleteImageFromGallery(name) {
     throw Error(`Delete image failed`);
   }
 }
+
+export async function getAllRooms() {
+  try {
+    const response = await api.get("/rooms/all-rooms");
+    if (response.status === 200) {
+      return response.data;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    throw Error(`Error fetching rooms`);
+  }
+}
+
+export async function deleteRoom(id) {
+  try {
+    const response = await api.delete(`/rooms/delete/room/${id}`);
+    return response.data;
+  } catch (error) {
+    throw Error(`Delete Error`);
+  }
+}
+
+export async function addNewRoom(room) {
+  try {
+    const formData = new FormData();
+    formData.append("image", room.image);
+    formData.append("name", room.name);
+    formData.append("price", room.price);
+    formData.append("area", room.area);
+    formData.append("type", room.type);
+    formData.append("details", room.details);
+    formData.append("view", room.view);
+
+    const response = await api.post(`/rooms/add/new-room`, formData);
+
+    if (response.status === 200) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    throw Error(`Adding fail`);
+  }
+}
