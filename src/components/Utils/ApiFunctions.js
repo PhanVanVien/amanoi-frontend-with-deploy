@@ -21,8 +21,10 @@ export async function addRoom(photo) {
   }
 }
 
-export async function getGallery() {
-  const response = await api.get("/image/fileSystem/name");
+export async function getGallery(page, limit) {
+  const response = await api.get(
+    `/image/fileSystem/name?page=${page}&limit=${limit}`
+  );
   if (response.status === 200) {
     return response.data;
   } else {

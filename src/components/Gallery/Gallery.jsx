@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Gallery.module.css";
+import "./style.css";
 import { IoCloseOutline } from "react-icons/io5";
 import {
   addRoom,
@@ -10,12 +11,17 @@ import { toast } from "react-toastify";
 import CustomButton from "../Common/CustomButton";
 import { FiUpload } from "react-icons/fi";
 import Modal from "../Common/Modal";
+import InfiniteScroll from "react-infinite-scroll-component";
+import PulseLoader from "react-spinners/PulseLoader";
+import Masonry from "react-masonry-css";
 
-import { withNamespaces } from "react-i18next";
-
-const Gallery = ({ t }) => {
+const Gallery = () => {
+  const [limit, setLimit] = useState(8);
   const baseURL = "http://localhost:8080/image/fileSystem/";
   const [gallery, setGallery] = useState([]);
+  const [page, setPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
 
   useEffect(() => {
     fetchData();
@@ -23,64 +29,32 @@ const Gallery = ({ t }) => {
 
   const fetchData = async () => {
     try {
-      const data = await getGallery();
+      const data = await getGallery(page, limit);
       setGallery(data);
     } catch (error) {
       console.error("Error fetching gallery data:", error);
     }
   };
-  const [image, setImage] = useState();
 
-  const handleImageChange = (e) => {
-    setImage(e.target.files[0]);
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const fetchMore = async () => {
+    setIsLoading(true);
     try {
-      const response = await addRoom(image);
-      if (response !== undefined) {
-        toast.success("Add image successful");
-        fetchData();
+      const data = await getGallery(page + 1, limit);
+      if (data.length === 0) {
+        setHasMore(false);
+      } else {
+        setGallery((rest) => [...rest, ...data]);
+        setPage((prevPage) => prevPage + 1);
       }
     } catch (error) {
-      toast.error(error.message);
+      console.error("Error fetching data:", error);
+    } finally {
+      setIsLoading(false);
     }
-  };
-
-  const handleDelete = async (name) => {
-    try {
-      const response = await deleteImageFromGallery(name);
-      if (response !== undefined) {
-        toast.success("Delete image successful");
-        fetchData();
-      }
-    } catch (error) {
-      toast.error(error.message);
-    }
-  };
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalContent, setModalContent] = useState("");
-
-  const openModal = (content) => {
-    setIsModalOpen(true);
-    setModalContent(content);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
   };
 
   return (
     <>
-      <Modal
-        isModalOpen={isModalOpen}
-        modalContent={modalContent}
-        onClose={closeModal}
-        onSubmit={handleSubmit}
-        onChange={handleImageChange}
-      />
       <div
         style={{
           display: "flex",
@@ -90,30 +64,48 @@ const Gallery = ({ t }) => {
         }}
         className={styles.out_container}
       >
-        <h1 className={styles.title}>{t("Explore")}</h1>
-        {/* <CustomButton
-          title={t("Upload Image")}
-          icon={FiUpload}
-          size={24}
-          onClick={() => openModal(t("Upload Image"))}
-        /> */}
-        <div className={styles.container}>
-          {gallery.map((item, index) => (
-            <div className={styles.box} key={index}>
-              <img
-                className={styles.image}
-                src={`${baseURL}${item}`}
-                alt={`Image ${index + 1}`}
+        <h1 className={styles.title}>Explore Amanoi</h1>
+        <div className={styles.out_container}>
+          <InfiniteScroll
+            dataLength={gallery.length}
+            next={fetchMore}
+            hasMore={hasMore}
+            loader={
+              <PulseLoader
+                cssOverride={{ textAlign: "center" }}
+                color="#303030"
+                size={10}
               />
-              {/* <div className={styles.delete} onClick={() => handleDelete(item)}>
-                <IoCloseOutline size={24} />
-              </div> */}
-            </div>
-          ))}
+            }
+            scrollThreshold={0.5}
+            className={styles.custom}
+          >
+            <Masonry
+              breakpointCols={breakpointColumnsObj}
+              className="my-masonry-grid"
+              columnClassName="my-masonry-grid_column"
+            >
+              {gallery.map((item, index) => (
+                <div key={index} className={styles.box}>
+                  <img
+                    className={styles.image}
+                    src={`${baseURL}${item}`}
+                    style={{ maxWidth: "100%" }}
+                    alt={`Image ${index + 1}`}
+                  />
+                </div>
+              ))}
+            </Masonry>
+          </InfiniteScroll>
         </div>
       </div>
     </>
   );
 };
-
-export default withNamespaces()(Gallery);
+const breakpointColumnsObj = {
+  default: 4,
+  1100: 3,
+  700: 2,
+  500: 1,
+};
+export default Gallery;

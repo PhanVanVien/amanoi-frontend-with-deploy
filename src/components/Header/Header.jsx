@@ -5,15 +5,9 @@ import { HiMagnifyingGlass } from "react-icons/hi2";
 import logo from "../../assets/images/logocen.png";
 // import "./style.css";
 import { LanguageContext } from "../Utils/LanguageContext";
-import { withNamespaces } from "react-i18next";
-import i18n from "../../i18n";
 import { Link } from "react-router-dom";
 
-const Header = ({ t }) => {
-  const changeLanguage = (lng) => {
-    i18n.changeLanguage(lng);
-  };
-
+const Header = () => {
   return (
     <div className={styles.container}>
       <div className={styles.left__container}>
@@ -24,10 +18,10 @@ const Header = ({ t }) => {
           onChange={(e) => changeLanguage(e.target.value)}
         >
           <option value="en" className={styles.language__item}>
-            {t("English")}
+            English
           </option>
           <option value="vi" className={styles.language__item}>
-            {t("Vietnamese")}
+            Vietnamese
           </option>
         </select>
       </div>
@@ -45,17 +39,19 @@ const Header = ({ t }) => {
             <Link to={"/login"} onClick={() => (document.title = "Login")}>
               Login
             </Link>
-            <Link to={"/admin"} onClick={() => (document.title = "Admin")}>Administration</Link>
+            <Link to={"/admin"} onClick={() => (document.title = "Admin")}>
+              Administration
+            </Link>
             <Link to={"/logout"}>Logout</Link>
           </div>
         </div>
 
         <Link to="/reserve">
-          <button className={styles.button}>{t("Reserve")}</button>
+          <button className={styles.button}>Reserve</button>
         </Link>
       </div>
     </div>
   );
 };
 
-export default withNamespaces()(Header);
+export default Header;

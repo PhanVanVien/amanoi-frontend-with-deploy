@@ -2,9 +2,9 @@ import React from "react";
 import styles from "./Nav.module.css";
 import { NavLink } from "react-router-dom";
 import navigation from "./navigation.json";
-import { withNamespaces } from "react-i18next";
+// import { withNamespaces } from "react-i18next";
 
-const Nav = ({ t }) => {
+const Nav = () => {
   return (
     <div className={styles.container}>
       <ul className={styles.menu}>
@@ -44,14 +44,13 @@ const Nav = ({ t }) => {
               }}
               onClick={() => (document.title = item.helmet)}
             >
-              {t(item.title)}
+              {item.title}
             </NavLink>
           </li>
         ))}
-        
       </ul>
     </div>
   );
 };
 
-export default withNamespaces()(Nav);
+export default Nav;

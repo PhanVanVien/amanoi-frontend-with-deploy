@@ -14,7 +14,7 @@ const CarouselImage = () => {
 
   const fetchData = async () => {
     try {
-      const data = await getGallery();
+      const data = await getGallery(1, 10);
       console.log(data);
       setImage(data);
     } catch (error) {
