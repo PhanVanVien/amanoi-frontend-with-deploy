@@ -88,6 +88,7 @@ const Gallery = ({ t }) => {
           justifyContent: "center",
           alignItems: "center",
         }}
+        className={styles.out_container}
       >
         <h1 className={styles.title}>{t("Explore")}</h1>
         {/* <CustomButton

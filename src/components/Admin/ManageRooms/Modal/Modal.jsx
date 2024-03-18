@@ -1,8 +1,19 @@
-import React, { useState } from "react";
-import styles from "./ModalAddRoom.module.css";
+import React, { useEffect, useState } from "react";
+import styles from "./Modal.module.css";
 
-const ModalAddRoom = ({ isModalOpen, onClose, onSubmit }) => {
+const Modal = ({ isModalOpen, onClose, onSubmit, title, room, isEditing }) => {
+  const baseURL = "http://localhost:8080/rooms/images/";
   const [previewImage, setPreviewImage] = useState(null);
+  const [initRoom, setInitRoom] = useState({
+    image: null,
+    name: "",
+    price: 0,
+    area: 0,
+    type: "1 King",
+    view: "Lake",
+    details: "",
+  });
+
   const [roomData, setRoomData] = useState({
     image: null,
     name: "",
@@ -13,10 +24,28 @@ const ModalAddRoom = ({ isModalOpen, onClose, onSubmit }) => {
     details: "",
   });
 
+  useEffect(() => {
+    if (room) {
+      setRoomData(room);
+      setPreviewImage(`${baseURL}${room.image}`);
+    }
+  }, [room]);
+
   const handleClose = () => {
     onClose();
-    setPreviewImage(null);
+    if (!isEditing) {
+      setRoomData(initRoom);
+      setPreviewImage(null);
+    }
   };
+
+  useEffect(() => {
+    if (!isEditing) {
+      console.log(isEditing);
+      setRoomData(initRoom);
+      setPreviewImage(null);
+    }
+  }, [isEditing]);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -27,7 +56,6 @@ const ModalAddRoom = ({ isModalOpen, onClose, onSubmit }) => {
       };
       setRoomData({ ...roomData, image: file });
       reader.readAsDataURL(file);
-      console.log(roomData);
     } else {
       setPreviewImage(null);
     }
@@ -39,11 +67,13 @@ const ModalAddRoom = ({ isModalOpen, onClose, onSubmit }) => {
       ...roomData,
       [id]: value,
     });
-    console.log(roomData);
   };
 
   const handleSubmit = () => {
-    setPreviewImage(null);
+    if (isEditing) {
+      setPreviewImage(null);
+      setRoomData(initRoom);
+    }
     onSubmit(roomData);
   };
 
@@ -55,7 +85,7 @@ const ModalAddRoom = ({ isModalOpen, onClose, onSubmit }) => {
     <div className={styles.container}>
       <form className={styles.modal}>
         <div className={styles.modal_content}>
-          <h1 className={styles.title}>Add Room</h1>
+          <h1 className={styles.title}>{title}</h1>
 
           <div className={styles.input__container}>
             <div className={styles.input__group}>
@@ -186,4 +216,4 @@ const ModalAddRoom = ({ isModalOpen, onClose, onSubmit }) => {
   );
 };
 
-export default ModalAddRoom;
+export default Modal;

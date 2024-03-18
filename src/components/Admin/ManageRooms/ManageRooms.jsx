@@ -1,15 +1,26 @@
 import React, { useEffect, useState } from "react";
 import styles from "./ManageRooms.module.css";
 import { FaPlus } from "react-icons/fa";
-import { addNewRoom, deleteRoom, getAllRooms } from "../../Utils/ApiFunctions";
+import {
+  addNewRoom,
+  deleteRoom,
+  editRoom,
+  getAllRooms,
+} from "../../Utils/ApiFunctions";
 import { MdModeEdit } from "react-icons/md";
 import { toast } from "react-toastify";
 import { MdDelete } from "react-icons/md";
-import ModalAddRoom from "./ModalAddRoom/ModalAddRoom";
+import Modal from "./Modal/Modal";
+import ModalConfirmation from "./Modal/ModalConfirmation/ModalConfirmation";
 
 const ManageRooms = () => {
+  const [titleModal, setTitleModal] = useState("");
   const [rooms, setRooms] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedRoom, setSelectedRoom] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
+  const [isConfirm, setIsConfirm] = useState(false);
+  const [id, setId] = useState();
 
   useEffect(() => {
     fetchData();
@@ -22,35 +33,59 @@ const ManageRooms = () => {
     } catch (error) {}
   };
 
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
+  const openModal = (title, room) => {
+    setTitleModal(title);
+    setSelectedRoom(room);
+    setIsEditing(!!room);
 
-  const handleDelete = async (id) => {
-    try {
-      const result = await deleteRoom(id);
-      if (result === "") {
-        fetchData();
-        toast.success(`Delete room ${id} successful`);
-      } else {
-      }
-    } catch (error) {}
+    setIsModalOpen(true);
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
   };
 
+  const closeConfirmation = () => {
+    setIsConfirm(false);
+  };
+
+  const openConfirm = (id) => {
+    setIsConfirm(true);
+    setId(id);
+  };
+
+  const handleDelete = async () => {
+    try {
+      const result = await deleteRoom(id);
+      if (result === "") {
+        fetchData();
+        toast.success(`Delete room ${id} successful`);
+      } else {
+        toast.error(`${result}`);
+      }
+    } catch (error) {}
+  };
+
   const onSubmit = async (room) => {
     try {
-      const response = await addNewRoom(room);
-
-      if (response !== undefined) {
-        toast.success("Add room successful");
-        closeModal();
-        fetchData();
+      if (isEditing) {
+        const response = await editRoom(room.id, room);
+        if (response !== undefined) {
+          toast.success("Update room successful");
+          closeModal();
+          fetchData();
+        } else {
+          toast.error("Update room failed");
+        }
       } else {
-        toast.error("Add room fail");
+        const response = await addNewRoom(room);
+        if (response !== undefined) {
+          toast.success("Add room successful");
+          closeModal();
+          fetchData();
+        } else {
+          toast.error("Add room failed");
+        }
       }
     } catch (error) {
       toast.error(error);
@@ -59,12 +94,20 @@ const ManageRooms = () => {
 
   return (
     <>
-      <ModalAddRoom
+      <Modal
         isModalOpen={isModalOpen}
         onClose={closeModal}
         onSubmit={onSubmit}
+        title={titleModal}
+        room={selectedRoom}
+        isEditing={isEditing}
       />
-      <button className={styles.addbtn} onClick={() => openModal()}>
+      <ModalConfirmation
+        isConfirm={isConfirm}
+        onClose={closeConfirmation}
+        onSubmit={handleDelete}
+      />
+      <button className={styles.addbtn} onClick={() => openModal("Add Room")}>
         <FaPlus size={16} style={{ marginRight: "5px" }} />
         <span>Add Room</span>
       </button>
@@ -93,13 +136,16 @@ const ManageRooms = () => {
               </td>
               <td style={{ display: "flex" }}>
                 <button
-                  className={styles.actionbtn}
+                  className={`${styles.actionbtn} ${styles.edit}`}
                   style={{ marginRight: "5px" }}
                 >
-                  <MdModeEdit size={20} />
+                  <MdModeEdit
+                    size={20}
+                    onClick={() => openModal("Edit Room", item)}
+                  />
                 </button>
-                <button className={styles.actionbtn}>
-                  <MdDelete size={20} onClick={() => handleDelete(item.id)} />
+                <button className={`${styles.actionbtn} ${styles.delete}`}>
+                  <MdDelete size={20} onClick={() => openConfirm(item.id)} />
                 </button>
               </td>
             </tr>

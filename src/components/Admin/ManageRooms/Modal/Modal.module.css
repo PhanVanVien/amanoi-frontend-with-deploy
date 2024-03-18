@@ -8,7 +8,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1;
+  z-index: 100;
 }
 
 .modal {
@@ -54,6 +54,7 @@
   padding: 10px 20px;
   cursor: pointer;
   flex: 1;
+  font-weight: bold;
 }
 
 .image__container {
@@ -61,7 +62,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border-left: 1px solid #f2f2f2;
+  border-left: 2px solid #f2f2f2;
   background-color: white;
 }
 
@@ -71,12 +72,14 @@
 }
 
 .upload {
-  /* border-right: 1px solid white; */
+  border: 3px solid #b5e550;
+  background-color: #abc32f;
   margin-right: 2.5px;
 }
 
 .cancel {
-  /* border-left: 1px solid white; */
+  border: 3px solid #777777;
+  background-color: #555555;
   margin-left: 2.5px;
 }
 
