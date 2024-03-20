@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Modal.module.css";
+import { getTypes, getViews } from "../../../Utils/ApiFunctions";
+import { toast } from "react-toastify";
 
 const Modal = ({ isModalOpen, onClose, onSubmit, title, room, isEditing }) => {
   const baseURL = "http://localhost:8080/rooms/images/";
@@ -9,9 +11,11 @@ const Modal = ({ isModalOpen, onClose, onSubmit, title, room, isEditing }) => {
     name: "",
     price: 0,
     area: 0,
-    type: "1 King",
-    view: "Lake",
+    type: "",
+    view: "",
     details: "",
+    adult: 0,
+    children: 0,
   });
 
   const [roomData, setRoomData] = useState({
@@ -19,10 +23,34 @@ const Modal = ({ isModalOpen, onClose, onSubmit, title, room, isEditing }) => {
     name: "",
     price: 0,
     area: 0,
-    type: "1 King",
-    view: "Lake",
+    type: "",
+    view: "",
     details: "",
+    adult: 0,
+    children: 0,
   });
+
+  const [types, setTypes] = useState([]);
+  const [views, setViews] = useState([]);
+
+  const fetchTypes = async () => {
+    try {
+      const types = await getTypes();
+      setTypes(types);
+    } catch (error) {}
+  };
+
+  const fetchViews = async () => {
+    try {
+      const views = await getViews();
+      setViews(views);
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    fetchTypes();
+    fetchViews();
+  }, [isModalOpen]);
 
   useEffect(() => {
     if (room) {
@@ -33,6 +61,7 @@ const Modal = ({ isModalOpen, onClose, onSubmit, title, room, isEditing }) => {
 
   const handleClose = () => {
     onClose();
+    openAddNew(false);
     if (!isEditing) {
       setRoomData(initRoom);
       setPreviewImage(null);
@@ -41,7 +70,6 @@ const Modal = ({ isModalOpen, onClose, onSubmit, title, room, isEditing }) => {
 
   useEffect(() => {
     if (!isEditing) {
-      console.log(isEditing);
       setRoomData(initRoom);
       setPreviewImage(null);
     }
@@ -70,9 +98,50 @@ const Modal = ({ isModalOpen, onClose, onSubmit, title, room, isEditing }) => {
   };
 
   const handleSubmit = () => {
-    setPreviewImage(null);
-    setRoomData(initRoom);
-    onSubmit(roomData);
+    if (roomData.type !== "" && roomData.view !== "") {
+      setPreviewImage(null);
+      setRoomData(initRoom);
+      onSubmit(roomData);
+    } else {
+      toast.error("Please choose type and view");
+    }
+  };
+
+  const [name, setName] = useState(false);
+
+  const openAddNew = (select) => {
+    setName(select);
+  };
+
+  const [newRoomType, setNewRoomType] = useState("");
+  const [newRoomView, setNewRoomView] = useState("");
+
+  const handleNewTypeAndView = (e) => {
+    const { value, id } = e.target;
+
+    if (id === "New Type") {
+      setNewRoomType(value);
+    }
+    if (id === "New View") {
+      setNewRoomView(value);
+    }
+  };
+
+  const handleAddNew = (name) => {
+    if (name === "New Type" && newRoomType !== "") {
+      console.log(newRoomType);
+      setNewRoomType("");
+      setName("");
+      setTypes([...types, newRoomType]);
+      setRoomData({ ...roomData, type: newRoomType });
+    }
+    if (name === "New View" && newRoomView !== "") {
+      console.log(newRoomView);
+      setNewRoomView("");
+      setName("");
+      setViews([...views, newRoomView]);
+      setRoomData({ ...roomData, view: newRoomView });
+    }
   };
 
   if (!isModalOpen) {
@@ -126,6 +195,35 @@ const Modal = ({ isModalOpen, onClose, onSubmit, title, room, isEditing }) => {
                 />
               </div>
             </div>
+            <div className={styles.input__grid}>
+              <div className={styles.input__group}>
+                <label htmlFor="adult" className={styles.label}>
+                  Adult
+                </label>
+                <input
+                  id="adult"
+                  type="number"
+                  min={0}
+                  className={styles.input}
+                  value={roomData.adult}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className={styles.input__group}>
+                <label htmlFor="children" className={styles.label}>
+                  Children
+                </label>
+                <input
+                  id="children"
+                  type="number"
+                  min={0}
+                  className={styles.input}
+                  value={roomData.children}
+                  onChange={handleInputChange}
+                />
+              </div>
+            </div>
+            {/* Input Image */}
             <div className={styles.input__group}>
               <label htmlFor="image" className={styles.label}>
                 Image
@@ -137,37 +235,93 @@ const Modal = ({ isModalOpen, onClose, onSubmit, title, room, isEditing }) => {
                 onChange={handleImageChange}
               />
             </div>
-            <div className={styles.input__grid}>
-              <div className={styles.input__group}>
+            {/* Add New Type */}
+            <div className={styles.select__grid}>
+              <div className={styles.select__container}>
                 <label htmlFor="type" className={styles.label}>
                   Type
                 </label>
-                <select
-                  id="type"
-                  className={styles.input}
-                  onChange={handleInputChange}
-                  value={roomData.type}
-                >
-                  <option value="1 King">1 King</option>
-                  <option value="1 Double">1 Double</option>
-                  <option value="2 King">2 King</option>
-                </select>
+                <div className={styles.select_group}>
+                  <select
+                    required
+                    id="type"
+                    className={styles.select}
+                    onChange={handleInputChange}
+                    value={roomData.type}
+                  >
+                    <option value="" disabled hidden>
+                      Select a room type
+                    </option>
+                    {types.map((type, index) => (
+                      <option value={type} key={index} name={type}>
+                        {type}
+                      </option>
+                    ))}
+                  </select>
+                  <div
+                    className={styles.select_button}
+                    onClick={() => openAddNew("New Type")}
+                  >
+                    New
+                  </div>
+                </div>
               </div>
-              <div className={styles.input__group}>
+              {/* Add New View */}
+              <div className={styles.select__container}>
                 <label htmlFor="view" className={styles.label}>
                   View
                 </label>
-                <select
-                  id="view"
-                  className={styles.input}
-                  onChange={handleInputChange}
-                  value={roomData.view}
-                >
-                  <option value="Lake">Lake</option>
-                  <option value="Bay">Bay</option>
-                </select>
+                <div className={styles.select_group}>
+                  <select
+                    required
+                    id="view"
+                    className={styles.select}
+                    onChange={handleInputChange}
+                    value={roomData.view}
+                  >
+                    <option value="" disabled hidden>
+                      Select a room view
+                    </option>
+                    {views.map((view, index) => (
+                      <option value={view} key={index} name={view}>
+                        {view}
+                      </option>
+                    ))}
+                  </select>
+                  <div
+                    className={styles.select_button}
+                    onClick={() => openAddNew("New View")}
+                  >
+                    New
+                  </div>
+                </div>
               </div>
             </div>
+
+            {/* Add New Type and View */}
+            {name && (
+              <div className={styles.input__group}>
+                <label htmlFor={name} className={styles.label}>
+                  {name}
+                </label>
+                <div style={{ display: "flex" }}>
+                  <input
+                    id={name}
+                    type="text"
+                    className={styles.custom_text}
+                    onChange={handleNewTypeAndView}
+                    style={{ flex: 1 }}
+                  />
+                  <div
+                    className={styles.custom_button}
+                    onClick={() => handleAddNew(name)}
+                  >
+                    Add
+                  </div>
+                </div>
+              </div>
+            )}
+
             <div className={styles.input__group}>
               <label htmlFor="details" className={styles.label}>
                 Details

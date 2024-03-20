@@ -26,7 +26,7 @@ const ManageRooms = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [limit, setLimit] = useState(8);
   const [totalRecords, setTotalRecords] = useState();
-  const [totalPages, setTotalPages] = useState();
+  const [totalPages, setTotalPages] = useState(0);
 
   useEffect(() => {
     fetchData();
@@ -34,7 +34,6 @@ const ManageRooms = () => {
 
   useEffect(() => {
     fetchData();
-    console.log(currentPage);
   }, [currentPage]);
 
   const fetchData = async () => {
@@ -134,8 +133,12 @@ const ManageRooms = () => {
             <th>Name</th>
             <th>Type</th>
             <th>View</th>
-            <th>Price</th>
-            <th>Area</th>
+            <th>Adults</th>
+            <th>Children</th>
+            <th>Price ($)</th>
+            <th>
+              Area (m<sup>2</sup>)
+            </th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -146,10 +149,10 @@ const ManageRooms = () => {
               <td>{item.name}</td>
               <td>{item.type}</td>
               <td>{item.view}</td>
-              <td>${item.price}</td>
-              <td>
-                {item.area}m<sup>2</sup>
-              </td>
+              <td>{item.adult}</td>
+              <td>{item.children}</td>
+              <td>{item.price}</td>
+              <td>{item.area}</td>
               <td style={{ display: "flex" }}>
                 <button
                   className={`${styles.actionbtn} ${styles.edit}`}

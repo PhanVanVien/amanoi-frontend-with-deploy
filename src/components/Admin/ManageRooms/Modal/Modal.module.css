@@ -62,7 +62,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border-left: 2px solid #f2f2f2;
+  border-left: 2px solid #dddddd;
   background-color: white;
 }
 
@@ -92,17 +92,17 @@
 
 .label {
   margin-right: 10px;
-  font-weight: 400;
-  color: #808080;
   font-weight: 600;
+  font-size: 0.9rem;
+  color: #bbbbbb;
 }
 
 .input {
-  border: 1px solid #808080;
+  border: 2px solid #dddddd;
   border-radius: 5px;
   outline: none;
   padding: 10px 10px;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-family: "Montserrat", sans-serif;
 }
 
@@ -114,12 +114,6 @@
   margin-bottom: 10px;
   display: flex;
   flex-direction: column;
-}
-
-.input__grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
 }
 
 textarea {
@@ -143,4 +137,79 @@ textarea {
 
 .inputfile + label {
   cursor: pointer;
+}
+
+.input__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.select__grid {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.select_container {
+}
+
+.select_group {
+  display: flex;
+}
+
+.select,
+.custom_text {
+  outline: none;
+  font-size: 0.9rem;
+
+  padding: 10px;
+  font-family: "Montserrat", sans-serif;
+  border-left: 2px solid #dddddd;
+  border-top: 2px solid #dddddd;
+  border-bottom: 2px solid #dddddd;
+  border-right: none;
+  border-radius: 5px 0 0 5px;
+}
+
+.select_button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 2px solid #ff9a00;
+  border-right: 2px solid #ff9a00;
+  border-bottom: 2px solid #ff9a00;
+  border-left: none;
+  background-color: #ff7400;
+  color: white;
+  font-weight: bold;
+  font-size: 0.9rem;
+  padding: 5px;
+  border-radius: 0px 5px 5px 0px;
+  cursor: pointer;
+}
+
+.option_container {
+  display: flex;
+  flex-direction: column;
+}
+
+.custom_button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 2px solid #b5e550;
+  border-right: 2px solid #b5e550;
+  border-bottom: 2px solid #b5e550;
+  border-left: none;
+  background-color: #abc32f;
+  color: white;
+  font-weight: bold;
+  font-size: 0.9rem;
+  padding: 5px;
+  border-radius: 0px 5px 5px 0px;
+  cursor: pointer;
+}
+
+.option_text {
 }

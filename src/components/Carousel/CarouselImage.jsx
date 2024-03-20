@@ -22,8 +22,6 @@ const CarouselImage = () => {
     }
   };
 
-  console.log(image);
-
   return (
     <Carousel
       additionalTransfrom={0}

@@ -3,8 +3,6 @@ import styles from "./Header.module.css";
 import { CiMenuBurger } from "react-icons/ci";
 import { HiMagnifyingGlass } from "react-icons/hi2";
 import logo from "../../assets/images/logocen.png";
-// import "./style.css";
-import { LanguageContext } from "../Utils/LanguageContext";
 import { Link } from "react-router-dom";
 
 const Header = () => {
