@@ -1,7 +1,8 @@
 import React from "react";
+import Gallery from "../../Gallery/Gallery";
 
 const ManageGallery = () => {
-  return <div>ManageGallery</div>;
+  return <Gallery />;
 };
 
 export default ManageGallery;

@@ -6,7 +6,6 @@
 
 .out_container {
   min-height: 100vh;
-  margin: 0px 50px;
 }
 
 .container {
@@ -49,8 +48,7 @@
   position: absolute;
   right: 10px;
   top: 10px;
-  background-color: white;
-  color: black;
+  color: white;
   border-radius: 50%;
   width: 30px;
   height: 30px;
@@ -59,9 +57,11 @@
   align-items: center;
   visibility: hidden;
   transition: all 0.1s ease;
+  border: 3px solid #ff7b7b;
+  background-color: #ff5252;
 }
 
- .box::before {
+.box::before {
   content: "";
   position: absolute;
   top: 0;
@@ -74,10 +74,27 @@
   opacity: 0;
 }
 
- .box:hover::before {
+.box:hover::before {
   opacity: 1;
 }
 
 .delete:hover {
   opacity: 0.8;
+}
+
+.out {
+  /* min-height: 100vh; */
+  margin: 0px 50px;
+}
+
+.addbtn {
+  border: none;
+  background-color: transparent;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.1rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin: 10px 0;
 }

@@ -14,14 +14,16 @@ import Modal from "../Common/Modal";
 import InfiniteScroll from "react-infinite-scroll-component";
 import PulseLoader from "react-spinners/PulseLoader";
 import Masonry from "react-masonry-css";
+import { FaPlus } from "react-icons/fa";
 
-const Gallery = () => {
+const Gallery = ({ title }) => {
   const [limit, setLimit] = useState(8);
   const baseURL = "http://localhost:8080/image/fileSystem/";
   const [gallery, setGallery] = useState([]);
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
+  const [image, setImage] = useState();
 
   useEffect(() => {
     fetchData();
@@ -29,7 +31,7 @@ const Gallery = () => {
 
   const fetchData = async () => {
     try {
-      const data = await getGallery(page, limit);
+      const data = await getGallery(1, limit);
       setGallery(data);
     } catch (error) {
       console.error("Error fetching gallery data:", error);
@@ -53,8 +55,79 @@ const Gallery = () => {
     }
   };
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState("");
+
+  const openModal = (content) => {
+    setIsModalOpen(true);
+    setModalContent(content);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await addRoom(image);
+      if (response !== undefined) {
+        toast.success("Add image successful");
+        fetchData();
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
+  const handleDelete = async (name) => {
+    try {
+      const response = await deleteImageFromGallery(name);
+      if (response !== undefined) {
+        toast.success("Delete image successful");
+        fetchData();
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
+  // const handleDelete = async (name, id) => {
+  //   try {
+  //     const response = await deleteImageFromGallery(name);
+  //     if (response !== undefined) {
+  //       toast.success("Delete image successful");
+  //       // const imageElement = document.getElementById(id);
+  //       // imageElement.style.display = "none";
+  //       // fetchData();
+  //     }
+  //   } catch (error) {
+  //     toast.error(error.message);
+  //   }
+  // };
+
+  const handleImageChange = (e) => {
+    setImage(e.target.files[0]);
+  };
+
   return (
     <>
+      <Modal
+        isModalOpen={isModalOpen}
+        modalContent={modalContent}
+        onClose={closeModal}
+        onSubmit={handleSubmit}
+        onChange={handleImageChange}
+      />
+      {!title && (
+        <button
+          className={styles.addbtn}
+          onClick={() => openModal("Add Image")}
+        >
+          <FaPlus size={16} style={{ marginRight: "5px" }} />
+          <span>Add Image</span>
+        </button>
+      )}
       <div
         style={{
           display: "flex",
@@ -62,9 +135,13 @@ const Gallery = () => {
           justifyContent: "center",
           alignItems: "center",
         }}
-        className={styles.out_container}
+        className={`${
+          title
+            ? `${styles.out_container} ${styles.out}`
+            : `${styles.out_container}`
+        }`}
       >
-        <h1 className={styles.title}>Explore Amanoi</h1>
+        {title && <h1 className={styles.title}>{title}</h1>}
         <div className={styles.out_container}>
           <InfiniteScroll
             dataLength={gallery.length}
@@ -93,6 +170,13 @@ const Gallery = () => {
                     style={{ maxWidth: "100%" }}
                     alt={`Image ${index + 1}`}
                   />
+
+                  <div
+                    className={styles.delete}
+                    onClick={() => handleDelete(item)}
+                  >
+                    <IoCloseOutline size={24} />
+                  </div>
                 </div>
               ))}
             </Masonry>

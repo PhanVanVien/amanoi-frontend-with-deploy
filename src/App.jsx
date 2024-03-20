@@ -28,7 +28,7 @@ function App() {
       <Nav />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/gallery" element={<Gallery />} />
+        <Route path="/gallery" element={<Gallery title="Explore Amanoi" />} />
         <Route path="/reserve" element={<Reserve />} />
         <Route path="/admin" element={<AdminDashboard />} />
       </Routes>

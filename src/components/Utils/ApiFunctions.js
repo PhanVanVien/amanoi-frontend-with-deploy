@@ -6,7 +6,6 @@ export const api = axios.create({
 });
 
 export async function addRoom(photo) {
-  console.log(photo);
   const formData = new FormData();
   formData.append("image", photo);
   try {
@@ -17,7 +16,7 @@ export async function addRoom(photo) {
       return false;
     }
   } catch (error) {
-    throw new Error(`Upload image failed`);
+    throw new Error(error.response.data);
   }
 }
 
@@ -47,7 +46,7 @@ export async function deleteImageFromGallery(name) {
 
 export async function getAllRooms() {
   try {
-    const response = await api.get("/rooms/all-rooms");
+    const response = await api.get("/rooms/all-rooms/all");
     if (response.status === 200) {
       return response.data;
     } else {
@@ -58,6 +57,20 @@ export async function getAllRooms() {
   }
 }
 
+export async function getAllRoomsByPageAndLimit(page, limit) {
+  try {
+    const response = await api.get(
+      `/rooms/all-rooms?page=${page}&limit=${limit}`
+    );
+    if (response.status === 200) {
+      return response.data;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    throw new Error(`Error fetching rooms`);
+  }
+}
 export async function deleteRoom(id) {
   try {
     const response = await api.delete(`/rooms/delete/room/${id}`);

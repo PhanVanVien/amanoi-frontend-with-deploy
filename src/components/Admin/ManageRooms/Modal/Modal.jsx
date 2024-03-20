@@ -70,10 +70,8 @@ const Modal = ({ isModalOpen, onClose, onSubmit, title, room, isEditing }) => {
   };
 
   const handleSubmit = () => {
-    if (isEditing) {
-      setPreviewImage(null);
-      setRoomData(initRoom);
-    }
+    setPreviewImage(null);
+    setRoomData(initRoom);
     onSubmit(roomData);
   };
 

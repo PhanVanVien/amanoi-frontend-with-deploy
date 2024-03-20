@@ -6,12 +6,14 @@ import {
   deleteRoom,
   editRoom,
   getAllRooms,
+  getAllRoomsByPageAndLimit,
 } from "../../Utils/ApiFunctions";
 import { MdModeEdit } from "react-icons/md";
 import { toast } from "react-toastify";
 import { MdDelete } from "react-icons/md";
 import Modal from "./Modal/Modal";
 import ModalConfirmation from "./Modal/ModalConfirmation/ModalConfirmation";
+import ReactPaginate from "react-paginate";
 
 const ManageRooms = () => {
   const [titleModal, setTitleModal] = useState("");
@@ -21,15 +23,26 @@ const ManageRooms = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [isConfirm, setIsConfirm] = useState(false);
   const [id, setId] = useState();
+  const [currentPage, setCurrentPage] = useState(0);
+  const [limit, setLimit] = useState(8);
+  const [totalRecords, setTotalRecords] = useState();
+  const [totalPages, setTotalPages] = useState();
 
   useEffect(() => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    fetchData();
+    console.log(currentPage);
+  }, [currentPage]);
+
   const fetchData = async () => {
     try {
-      const data = await getAllRooms();
-      setRooms(data);
+      const data = await getAllRoomsByPageAndLimit(currentPage, limit);
+      setRooms(data.rooms);
+      // setTotalRecords(data.totalRecords);
+      setTotalPages(data.totalPages);
     } catch (error) {}
   };
 
@@ -92,6 +105,9 @@ const ManageRooms = () => {
     }
   };
 
+  const handlePageClick = (event) => {
+    setCurrentPage(event.selected);
+  };
   return (
     <>
       <Modal
@@ -114,7 +130,7 @@ const ManageRooms = () => {
       <table>
         <thead>
           <tr>
-            <th>#</th>
+            <th>ID</th>
             <th>Name</th>
             <th>Type</th>
             <th>View</th>
@@ -126,7 +142,7 @@ const ManageRooms = () => {
         <tbody>
           {rooms.map((item, index) => (
             <tr key={item.id}>
-              <td style={{ fontWeight: "bold" }}>{index + 1}</td>
+              <td style={{ fontWeight: "bold" }}>{item.id}</td>
               <td>{item.name}</td>
               <td>{item.type}</td>
               <td>{item.view}</td>
@@ -152,6 +168,19 @@ const ManageRooms = () => {
           ))}
         </tbody>
       </table>
+      <ReactPaginate
+        breakLabel="..."
+        nextLabel=">"
+        onPageChange={(e) => handlePageClick(e)}
+        pageRangeDisplayed={5}
+        pageCount={totalPages}
+        previousLabel="<"
+        renderOnZeroPageCount={null}
+        className={styles.paginate}
+        containerClassName={"pagination"}
+        pageClassName={"page-item"}
+        activeClassName={"activePage"}
+      />
     </>
   );
 };

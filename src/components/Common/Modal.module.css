@@ -35,7 +35,7 @@
 }
 
 .title {
-  font-weight: 400;
+  font-weight: bold;
   font-size: 1.8rem;
 }
 
@@ -45,7 +45,9 @@
 }
 
 .button {
-  background-color: black;
+  /* background-color: black;
+  color: white; */
+  font-weight: bold;
   color: white;
   padding: 10px 20px;
   cursor: pointer;
@@ -57,11 +59,17 @@
 }
 
 .upload {
-  border-right: 1px solid white;
+  /* border-right: 1px solid white; */
+  border: 3px solid #b5e550;
+  background-color: #abc32f;
+  margin-right: 2.5px;
 }
 
 .cancel {
-  border-left: 1px solid white;
+  /* border-left: 1px solid white; */
+  border: 3px solid #777777;
+  background-color: #555555;
+  margin-left: 2.5px;
 }
 
 .image__container {
@@ -80,12 +88,13 @@
 }
 
 .inputfile + label {
-  font-size: 1rem;
-  font-weight: 400;
-  color: white;
-  background-color: black;
+  border: 3px solid #ff9a00;
+  background-color: #ff7400;
   display: inline-block;
   padding: 10px 20px;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
 }
 
 .inputfile + label {

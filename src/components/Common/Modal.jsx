@@ -11,6 +11,10 @@ const Modal = ({ isModalOpen, modalContent, onClose, onChange, onSubmit }) => {
     onClose();
   };
 
+  const handleClose = () => {
+    setPreviewImage(null);
+    onClose();
+  };
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     onChange(e);
@@ -50,7 +54,7 @@ const Modal = ({ isModalOpen, modalContent, onClose, onChange, onSubmit }) => {
             className={`${styles.button} ${styles.upload}`}
             onClick={handleSubmit}
           >
-            Upload
+            Save
           </div>
           <div>
             <input
@@ -60,11 +64,13 @@ const Modal = ({ isModalOpen, modalContent, onClose, onChange, onSubmit }) => {
               className={styles.inputfile}
               onChange={handleImageChange}
             />
-            <label htmlFor="file">Choose a file</label>
+            <label htmlFor="file">
+              {previewImage ? "Replace image" : "Choose an image"}
+            </label>
           </div>
           <div
             className={`${styles.button} ${styles.cancel}`}
-            onClick={onClose}
+            onClick={handleClose}
           >
             Cancel
           </div>
