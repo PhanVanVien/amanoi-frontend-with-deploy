@@ -55,6 +55,7 @@
   cursor: pointer;
   flex: 1;
   font-weight: bold;
+  user-select: none;
 }
 
 .image__container {
@@ -94,12 +95,11 @@
   margin-right: 10px;
   font-weight: 600;
   font-size: 0.9rem;
-  color: #bbbbbb;
+  color: #303030;
 }
 
 .input {
-  border: 2px solid #dddddd;
-  border-radius: 5px;
+  border: 1px solid #303030;
   outline: none;
   padding: 10px 10px;
   font-size: 0.9rem;
@@ -165,28 +165,24 @@ textarea {
 
   padding: 10px;
   font-family: "Montserrat", sans-serif;
-  border-left: 2px solid #dddddd;
-  border-top: 2px solid #dddddd;
-  border-bottom: 2px solid #dddddd;
+  border-left: 1px solid #303030;
+  border-top: 1px solid #303030;
+  border-bottom: 1px solid #303030;
   border-right: none;
-  border-radius: 5px 0 0 5px;
 }
 
 .select_button {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-top: 2px solid #ff9a00;
-  border-right: 2px solid #ff9a00;
-  border-bottom: 2px solid #ff9a00;
-  border-left: none;
+  border: 2px solid #ff9a00;
   background-color: #ff7400;
   color: white;
   font-weight: bold;
   font-size: 0.9rem;
   padding: 5px;
-  border-radius: 0px 5px 5px 0px;
   cursor: pointer;
+  user-select: none;
 }
 
 .option_container {
@@ -198,18 +194,57 @@ textarea {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-top: 2px solid #b5e550;
-  border-right: 2px solid #b5e550;
-  border-bottom: 2px solid #b5e550;
   border-left: none;
-  background-color: #abc32f;
   color: white;
   font-weight: bold;
   font-size: 0.9rem;
   padding: 5px;
-  border-radius: 0px 5px 5px 0px;
   cursor: pointer;
+  user-select: none;
+}
+
+.add_button {
+  background-color: #abc32f;
+  user-select: none;
+  border: 2px solid #b5e550;
+}
+
+.cancel_button {
+  background-color: #555555;
+  user-select: none;
+  border: 2px solid #777777;
 }
 
 .option_text {
+}
+
+.icon_outer_container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.icon_container {
+  display: flex;
+}
+
+.icon_input {
+  border: 1px solid #303030;
+  border-right: none;
+  outline: none;
+  width: 170px;
+  padding: 10px 10px;
+  font-size: 0.9rem;
+  font-family: "Montserrat", sans-serif;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 5px;
+  color: white;
+  font-size: 0.8rem;
+  background-color: #555555;
+  border: 2px solid #777777;
+  user-select: none;
 }

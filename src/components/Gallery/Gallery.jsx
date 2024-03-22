@@ -165,6 +165,7 @@ const Gallery = ({ title }) => {
               {gallery.map((item, index) => (
                 <div key={index} className={styles.box}>
                   <img
+                    loading="lazy"
                     className={styles.image}
                     src={`${baseURL}${item}`}
                     style={{ maxWidth: "100%" }}

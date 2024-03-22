@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import styles from "./Modal.module.css";
 import { getTypes, getViews } from "../../../Utils/ApiFunctions";
 import { toast } from "react-toastify";
+import { FaDollarSign } from "react-icons/fa6";
+import { MdOutlineMeetingRoom } from "react-icons/md";
+import { FaChildReaching } from "react-icons/fa6";
+import { FaPerson } from "react-icons/fa6";
 
 const Modal = ({ isModalOpen, onClose, onSubmit, title, room, isEditing }) => {
   const baseURL = "http://localhost:8080/rooms/images/";
@@ -127,6 +131,10 @@ const Modal = ({ isModalOpen, onClose, onSubmit, title, room, isEditing }) => {
     }
   };
 
+  const closeAddNew = () => {
+    setName(false);
+  };
+
   const handleAddNew = (name) => {
     if (name === "New Type" && newRoomType !== "") {
       console.log(newRoomType);
@@ -167,60 +175,82 @@ const Modal = ({ isModalOpen, onClose, onSubmit, title, room, isEditing }) => {
                 onChange={handleInputChange}
               />
             </div>
-            <div className={styles.input__grid}>
+            <div className={styles.icon_outer_container}>
               <div className={styles.input__group}>
                 <label htmlFor="price" className={styles.label}>
                   Price
                 </label>
-                <input
-                  id="price"
-                  type="number"
-                  min={0}
-                  className={styles.input}
-                  value={roomData.price}
-                  onChange={handleInputChange}
-                />
+                <div className={styles.icon_container}>
+                  <input
+                    id="price"
+                    type="number"
+                    min={0}
+                    className={styles.icon_input}
+                    value={roomData.price}
+                    onChange={handleInputChange}
+                  />
+                  <div className={styles.icon}>
+                    <FaDollarSign size={20} />
+                  </div>
+                </div>
               </div>
               <div className={styles.input__group}>
                 <label htmlFor="area" className={styles.label}>
                   Area
                 </label>
-                <input
-                  id="area"
-                  type="number"
-                  min={0}
-                  className={styles.input}
-                  value={roomData.area}
-                  onChange={handleInputChange}
-                />
+                <div className={styles.icon_container}>
+                  <input
+                    id="area"
+                    type="number"
+                    min={0}
+                    className={styles.icon_input}
+                    value={roomData.area}
+                    onChange={handleInputChange}
+                  />
+                  <div className={styles.icon}>
+                    <strong>
+                      m<sup>2</sup>
+                    </strong>
+                  </div>
+                </div>
               </div>
             </div>
-            <div className={styles.input__grid}>
+            <div className={styles.icon_outer_container}>
               <div className={styles.input__group}>
                 <label htmlFor="adult" className={styles.label}>
                   Adult
                 </label>
-                <input
-                  id="adult"
-                  type="number"
-                  min={0}
-                  className={styles.input}
-                  value={roomData.adult}
-                  onChange={handleInputChange}
-                />
+                <div className={styles.icon_container}>
+                  <input
+                    id="adult"
+                    type="number"
+                    min={0}
+                    className={styles.icon_input}
+                    value={roomData.adult}
+                    onChange={handleInputChange}
+                  />
+                  <div className={styles.icon}>
+                    <FaPerson size={20} />
+                  </div>
+                </div>
               </div>
               <div className={styles.input__group}>
                 <label htmlFor="children" className={styles.label}>
                   Children
                 </label>
-                <input
-                  id="children"
-                  type="number"
-                  min={0}
-                  className={styles.input}
-                  value={roomData.children}
-                  onChange={handleInputChange}
-                />
+                <div className={styles.icon_container}>
+                  <input
+                    id="children"
+                    type="number"
+                    min={0}
+                    className={styles.icon_input}
+                    value={roomData.children}
+                    onChange={handleInputChange}
+                  />
+                  <div className={styles.icon}>
+                    <FaChildReaching size={20} />
+                  </div>
+                </div>
               </div>
             </div>
             {/* Input Image */}
@@ -253,7 +283,12 @@ const Modal = ({ isModalOpen, onClose, onSubmit, title, room, isEditing }) => {
                       Select a room type
                     </option>
                     {types.map((type, index) => (
-                      <option value={type} key={index} name={type}>
+                      <option
+                        value={type}
+                        key={index}
+                        name={type}
+                        className={styles.option}
+                      >
                         {type}
                       </option>
                     ))}
@@ -313,10 +348,16 @@ const Modal = ({ isModalOpen, onClose, onSubmit, title, room, isEditing }) => {
                     style={{ flex: 1 }}
                   />
                   <div
-                    className={styles.custom_button}
+                    className={`${styles.custom_button} ${styles.add_button}`}
                     onClick={() => handleAddNew(name)}
                   >
                     Add
+                  </div>
+                  <div
+                    className={`${styles.custom_button} ${styles.cancel_button}`}
+                    onClick={closeAddNew}
+                  >
+                    Cancel
                   </div>
                 </div>
               </div>

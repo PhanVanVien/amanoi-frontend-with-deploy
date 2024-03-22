@@ -83,7 +83,7 @@ const ManageRooms = () => {
       if (isEditing) {
         const response = await editRoom(room.id, room);
         if (response !== undefined) {
-          toast.success("Update room successful");
+          toast.success(`Successfully update room ${room.id}`);
           closeModal();
           fetchData();
         } else {
