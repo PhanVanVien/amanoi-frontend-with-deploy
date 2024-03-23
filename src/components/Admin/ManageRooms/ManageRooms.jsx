@@ -143,7 +143,7 @@ const ManageRooms = () => {
           </tr>
         </thead>
         <tbody>
-          {rooms.map((item, index) => (
+          {/* {rooms.map((item, index) => (
             <tr key={item.id}>
               <td style={{ fontWeight: "bold" }}>{item.id}</td>
               <td>{item.name}</td>
@@ -168,7 +168,7 @@ const ManageRooms = () => {
                 </button>
               </td>
             </tr>
-          ))}
+          ))} */}
         </tbody>
       </table>
       <ReactPaginate
