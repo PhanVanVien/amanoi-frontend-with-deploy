@@ -21,7 +21,7 @@ const RoomItem = () => {
   return (
     <>
       {rooms.map((item) => (
-        <div key={item.id} className={styles.container}>
+        <div key={item.roomId} className={styles.container}>
           <div className={styles.content}>
             <img
               src={`${baseUrl}${item.image}`}
