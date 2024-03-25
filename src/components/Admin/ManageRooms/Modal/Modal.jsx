@@ -137,14 +137,12 @@ const Modal = ({ isModalOpen, onClose, onSubmit, title, room, isEditing }) => {
 
   const handleAddNew = (name) => {
     if (name === "New Type" && newRoomType !== "") {
-      console.log(newRoomType);
       setNewRoomType("");
       setName("");
       setTypes([...types, newRoomType]);
       setRoomData({ ...roomData, type: newRoomType });
     }
     if (name === "New View" && newRoomView !== "") {
-      console.log(newRoomView);
       setNewRoomView("");
       setName("");
       setViews([...views, newRoomView]);

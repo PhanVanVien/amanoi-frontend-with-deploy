@@ -81,9 +81,9 @@ const ManageRooms = () => {
   const onSubmit = async (room) => {
     try {
       if (isEditing) {
-        const response = await editRoom(room.id, room);
+        const response = await editRoom(room.roomId, room);
         if (response !== undefined) {
-          toast.success(`Successfully update room ${room.id}`);
+          toast.success(`Successfully update room ${room.roomId}`);
           closeModal();
           fetchData();
         } else {
@@ -143,9 +143,9 @@ const ManageRooms = () => {
           </tr>
         </thead>
         <tbody>
-          {rooms.map((item, index) => (
+          {rooms.map((item) => (
             <tr key={item.roomId}>
-              <td style={{ fontWeight: "bold" }}>{item.id}</td>
+              <td style={{ fontWeight: "bold" }}>{item.roomId}</td>
               <td>{item.name}</td>
               <td>{item.type}</td>
               <td>{item.view}</td>
@@ -164,7 +164,7 @@ const ManageRooms = () => {
                   />
                 </button>
                 <button className={`${styles.actionbtn} ${styles.delete}`}>
-                  <MdDelete size={20} onClick={() => openConfirm(item.id)} />
+                  <MdDelete size={20} onClick={() => openConfirm(item.roomId)} />
                 </button>
               </td>
             </tr>
