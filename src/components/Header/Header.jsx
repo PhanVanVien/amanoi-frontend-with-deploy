@@ -11,10 +11,7 @@ const Header = () => {
       <div className={styles.left__container}>
         <CiMenuBurger size={28} /> <a style={{ marginLeft: "28px" }}>Menu</a>{" "}
         <HiMagnifyingGlass style={{ marginLeft: "50px" }} size={20} />
-        <select
-          className={styles.language__container}
-          onChange={(e) => changeLanguage(e.target.value)}
-        >
+        <select className={styles.language__container}>
           <option value="en" className={styles.language__item}>
             English
           </option>

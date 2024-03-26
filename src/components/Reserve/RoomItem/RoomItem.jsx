@@ -2,8 +2,13 @@ import React, { useEffect, useState } from "react";
 import styles from "./RoomItem.module.css";
 import { BiSolidCoffeeAlt } from "react-icons/bi";
 import CustomButton from "../../Common/CustomButton";
-import { getAllRooms } from "../../Utils/ApiFunctions";
+import {
+  getAllRooms,
+  getAllRoomsByPageAndLimit,
+} from "../../Utils/ApiFunctions";
 const RoomItem = () => {
+  const [currentPage, setCurrentPage] = useState(0);
+  const [limit, setLimit] = useState(10);
   const baseUrl = "http://localhost:8080/rooms/images/";
   const [rooms, setRooms] = useState([]);
 

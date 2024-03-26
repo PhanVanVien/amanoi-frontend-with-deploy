@@ -9,8 +9,8 @@ import { IoIosArrowUp } from "react-icons/io";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 
 const AdminDashboard = () => {
-  const [manageRooms, setManageRooms] = useState(true);
-  const [manageReservations, setManageReservations] = useState(false);
+  const [manageRooms, setManageRooms] = useState(false);
+  const [manageReservations, setManageReservations] = useState(true);
   const [manageGallery, setManageGallery] = useState(false);
   const [manageUsers, setManageUsers] = useState(false);
   const [selectedSection, setSelectedSection] = useState("Rooms");
@@ -61,7 +61,7 @@ const AdminDashboard = () => {
   };
 
   return (
-    <>
+    <div className={styles.outer_container}>
       <div className={styles.container}>
         <div className={styles.title_select}>
           <span className={styles.title}>
@@ -109,7 +109,7 @@ const AdminDashboard = () => {
         {manageGallery && <ManageGallery />}
         {manageUsers && <ManageUsers />}
       </div>
-    </>
+    </div>
   );
 };
 

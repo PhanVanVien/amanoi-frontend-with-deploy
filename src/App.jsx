@@ -3,14 +3,12 @@ import Gallery from "./components/Gallery/Gallery";
 import HomePage from "./components/Home/HomePage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "react-tooltip/dist/react-tooltip.css";
 import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Nav from "./components/Nav/Nav";
 import Footer from "./components/Footer/Footer";
-// import { withNamespaces } from "react-i18next";
 import { IoArrowUp } from "react-icons/io5";
-import { useEffect } from "react";
-// import i18n from "./i18n";
 import AdminDashboard from "./components/Admin/AdminDashboard";
 import Reserve from "./components/Reserve/Reserve/Reserve";
 

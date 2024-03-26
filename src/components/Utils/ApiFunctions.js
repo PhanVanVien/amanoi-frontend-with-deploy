@@ -48,7 +48,7 @@ export async function getAllRooms() {
   try {
     const response = await api.get("/rooms/all-rooms/all");
     if (response.status === 200) {
-      return response.data;
+      return response.data.data;
     } else {
       return false;
     }
@@ -71,41 +71,17 @@ export async function getAllRoomsByPageAndLimit(page, limit) {
     throw new Error(`Error fetching rooms`);
   }
 }
+
 export async function deleteRoom(id) {
   try {
     const response = await api.delete(`/rooms/delete/room/${id}`);
     return response.data;
   } catch (error) {
-    throw new Error(`Delete Error`);
+    throw new Error(error.response.data.message);
   }
 }
 
-// export async function addNewRoom(room) {
-//   try {
-//     const formData = new FormData();
-//     formData.append("image", room.image);
-//     formData.append("name", room.name);
-//     formData.append("price", room.price);
-//     formData.append("area", room.area);
-//     formData.append("type", room.type);
-//     formData.append("details", room.details);
-//     formData.append("view", room.view);
-
-//     const response = await api.post(`/rooms/add/new-room`, formData);
-
-//     if (response.status === 200) {
-//       return true;
-//     } else {
-//       return false;
-//     }
-//   } catch (error) {
-//     toast.error(error);
-//     throw new Error(`Adding fail`);
-//   }
-// }
-
 export async function addNewRoom(room) {
-  console.table(room);
   try {
     const formData = new FormData();
     formData.append("image", room.image);
@@ -130,29 +106,6 @@ export async function addNewRoom(room) {
     throw new Error(`Adding fail`);
   }
 }
-
-// export async function editRoom(id, room) {
-//   try {
-//     const formData = new FormData();
-//     formData.append("image", room.image);
-//     formData.append("name", room.name);
-//     formData.append("price", room.price);
-//     formData.append("area", room.area);
-//     formData.append("type", room.type);
-//     formData.append("details", room.details);
-//     formData.append("view", room.view);
-
-//     const response = await api.put(`/rooms/update/${id}`, formData);
-
-//     if (response.status === 200) {
-//       return true;
-//     } else {
-//       return false;
-//     }
-//   } catch (error) {
-//     throw new Error("");
-//   }
-// }
 
 export async function editRoom(id, room) {
   try {
@@ -183,7 +136,7 @@ export async function getTypes() {
   try {
     const response = await api.get(`/rooms/room/types`);
     if (response.status === 200) {
-      return response.data;
+      return response.data.data;
     } else {
       return false;
     }
@@ -196,11 +149,38 @@ export async function getViews() {
   try {
     const response = await api.get(`/rooms/room/views`);
     if (response.status === 200) {
-      return response.data;
+      return response.data.data;
     } else {
       return false;
     }
   } catch (error) {
     throw new Error("");
+  }
+}
+
+export async function getReservations(type, page, limit) {
+  try {
+    const response = await api.get(
+      `/reservations/${type}?page=${page}&limit=${limit}`
+    );
+    if (response.status === 200) {
+      return response.data;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function updateStatus(reservationId, status) {
+  try {
+    const response = api.put(
+      `/reservations/reservation/${reservationId}/status?status=${status}`
+    );
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.error(error);
   }
 }

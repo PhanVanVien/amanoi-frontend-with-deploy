@@ -2,29 +2,6 @@
   margin: 0;
 }
 
-.pagination {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  cursor: pointer;
-}
-
-.activePage {
-  background-color: white;
-  color: white;
-}
-
-.page-item {
-  /* border: 0.5px solid white; */
-  cursor: pointer;
-  width: 40px;
-  height: 40px;
-  color: black;
-  font-weight: bold;
-  user-select: none;
-  list-style: none;
-}
-
 .scroll-top-button {
   position: fixed;
   bottom: 80px;

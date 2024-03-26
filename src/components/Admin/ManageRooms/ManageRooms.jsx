@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styles from "./ManageRooms.module.css";
+import "./style.css";
 import { FaPlus } from "react-icons/fa";
 import {
   addNewRoom,
   deleteRoom,
   editRoom,
-  getAllRooms,
   getAllRoomsByPageAndLimit,
 } from "../../Utils/ApiFunctions";
 import { MdModeEdit } from "react-icons/md";
@@ -27,6 +27,7 @@ const ManageRooms = () => {
   const [limit, setLimit] = useState(8);
   const [totalRecords, setTotalRecords] = useState();
   const [totalPages, setTotalPages] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     fetchData();
@@ -34,15 +35,18 @@ const ManageRooms = () => {
 
   useEffect(() => {
     fetchData();
-  }, [currentPage]);
+  }, [currentPage, deleteRoom]);
 
   const fetchData = async () => {
     try {
-      const data = await getAllRoomsByPageAndLimit(currentPage, limit);
-      setRooms(data.rooms);
-      // setTotalRecords(data.totalRecords);
-      setTotalPages(data.totalPages);
-    } catch (error) {}
+      setIsLoading(true);
+      const response = await getAllRoomsByPageAndLimit(currentPage, limit);
+      setRooms(response.data);
+      setTotalPages(response.totalPages);
+    } catch (error) {
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const openModal = (title, room) => {
@@ -69,13 +73,15 @@ const ManageRooms = () => {
   const handleDelete = async () => {
     try {
       const result = await deleteRoom(id);
-      if (result === "") {
+      if (result.statusCode === 200) {
         fetchData();
         toast.success(`Delete room ${id} successful`);
       } else {
-        toast.error(`${result}`);
+        toast.error(`${result.message}`);
       }
-    } catch (error) {}
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   const onSubmit = async (room) => {
@@ -107,6 +113,7 @@ const ManageRooms = () => {
   const handlePageClick = (event) => {
     setCurrentPage(event.selected);
   };
+
   return (
     <>
       <Modal
@@ -153,7 +160,7 @@ const ManageRooms = () => {
               <td>{item.children}</td>
               <td>{item.price}</td>
               <td>{item.area}</td>
-              <td style={{ display: "flex" }}>
+              <td style={{ display: "flex", justifyContent: "center" }}>
                 <button
                   className={`${styles.actionbtn} ${styles.edit}`}
                   style={{ marginRight: "5px" }}
@@ -164,7 +171,10 @@ const ManageRooms = () => {
                   />
                 </button>
                 <button className={`${styles.actionbtn} ${styles.delete}`}>
-                  <MdDelete size={20} onClick={() => openConfirm(item.roomId)} />
+                  <MdDelete
+                    size={20}
+                    onClick={() => openConfirm(item.roomId)}
+                  />
                 </button>
               </td>
             </tr>
