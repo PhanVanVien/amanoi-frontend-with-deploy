@@ -178,9 +178,39 @@ export async function updateStatus(reservationId, status) {
     const response = api.put(
       `/reservations/reservation/${reservationId}/status?status=${status}`
     );
-    console.log(response);
     return response;
   } catch (error) {
     console.error(error);
+  }
+}
+
+export async function getReservationByConfirmationCode(confirmationCode) {
+  try {
+    const response = await api.get(
+      `/reservations/reservation/confirmation?confirmationCode=${confirmationCode}`
+    );
+    if (response.status === 200) {
+      return response;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+}
+
+export async function getReservationByEmail(email) {
+  try {
+    const response = await api.get(
+      `/reservations/reservation/email?email=${email}`
+    );
+    console.log(response);
+    if (response.status === 200) {
+      return response;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    throw new Error(error.response.data.message);
   }
 }

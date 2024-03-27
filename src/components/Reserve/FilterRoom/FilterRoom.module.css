@@ -1,3 +1,15 @@
+.title_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modify {
+  font-size: 0.9rem;
+  color: black;
+  cursor: pointer;
+}
+
 .container {
   background-color: #ffffff;
   border: 1px solid #cccccc;

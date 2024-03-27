@@ -11,6 +11,7 @@ import Footer from "./components/Footer/Footer";
 import { IoArrowUp } from "react-icons/io5";
 import AdminDashboard from "./components/Admin/AdminDashboard";
 import Reserve from "./components/Reserve/Reserve/Reserve";
+import ModifyReservation from "./components/Reserve/ModifyReservation/ModifyReservation";
 
 function App() {
   const scrollToTop = () => {
@@ -29,6 +30,10 @@ function App() {
         <Route path="/gallery" element={<Gallery title="Explore Amanoi" />} />
         <Route path="/reserve" element={<Reserve />} />
         <Route path="/admin" element={<AdminDashboard />} />
+        <Route
+          path="/reserve/modify-reservation"
+          element={<ModifyReservation />}
+        />
       </Routes>
       <Footer />
       <ToastContainer />
