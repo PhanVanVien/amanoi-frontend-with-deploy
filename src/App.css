@@ -52,7 +52,7 @@
   background-color: #f9f9f9;
   min-width: 10rem;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 2;
+  z-index: 3;
 }
 
 .dropdown-content a {
@@ -68,4 +68,19 @@
 
 .dropdown:hover .dropdown-content {
   display: block;
+}
+
+.custom-date-range-picker {
+  /* Your custom styles here */
+}
+
+/* Example: Changing the background color of the calendar */
+.custom-date-range-picker .rs-picker-calendar {
+  background-color: #f0f0f0;
+}
+
+/* Example: Changing the color of the selected dates */
+.custom-date-range-picker .rs-picker-selected {
+  background-color: #3399ff;
+  color: #fff;
 }

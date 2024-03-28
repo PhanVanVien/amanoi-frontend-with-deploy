@@ -181,19 +181,21 @@ const ManageRooms = () => {
           ))}
         </tbody>
       </table>
-      <ReactPaginate
-        breakLabel="..."
-        nextLabel=">"
-        onPageChange={(e) => handlePageClick(e)}
-        pageRangeDisplayed={5}
-        pageCount={totalPages}
-        previousLabel="<"
-        renderOnZeroPageCount={null}
-        className={styles.paginate}
-        containerClassName={"pagination"}
-        pageClassName={"page-item"}
-        activeClassName={"activePage"}
-      />
+      {totalPages > 1 && (
+        <ReactPaginate
+          breakLabel="..."
+          nextLabel=">"
+          onPageChange={(e) => handlePageClick(e)}
+          pageRangeDisplayed={5}
+          pageCount={totalPages}
+          previousLabel="<"
+          renderOnZeroPageCount={null}
+          className={styles.paginate}
+          containerClassName={"pagination"}
+          pageClassName={"page-item"}
+          activeClassName={"activePage"}
+        />
+      )}
     </>
   );
 };

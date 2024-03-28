@@ -5,7 +5,7 @@ import { FaHandHolding } from "react-icons/fa";
 import { IoGlobeSharp } from "react-icons/io5";
 import { BsFillClockFill } from "react-icons/bs";
 
-const DetailReserve = () => {
+const DetailReserve = ({ data }) => {
   return (
     <div>
       <div className={styles.form_reservation}>
@@ -25,7 +25,9 @@ const DetailReserve = () => {
             <div className={styles.hour}>
               Thu, Mar 14, 2024 - Fri, Mar 15, 2024
             </div>
-            <div className={styles.hour}>1 Adult, 1 Child</div>
+            <div className={styles.hour}>
+              {data.adult} Adult, {data.child} Child
+            </div>
           </div>
         </div>
         <div className={styles.total}>
