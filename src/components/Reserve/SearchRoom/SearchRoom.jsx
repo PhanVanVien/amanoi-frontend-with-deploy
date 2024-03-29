@@ -38,13 +38,11 @@ const SearchRoom = ({ data, setData }) => {
     setData(tempData);
     setOpenGuestsSelection(!openGuestsSelection);
   };
-  const dateRangePickerRef = useRef(null);
 
-  const handleCellClick = () => {
-    if (dateRangePickerRef.current) {
-      dateRangePickerRef.current.open();
-    }
+  const hello = () => {
+    console.log("Heloo");
   };
+
   return (
     <>
       <div className={styles.accommodation}>
@@ -93,7 +91,7 @@ const SearchRoom = ({ data, setData }) => {
             )}
           </div>
 
-          <div
+          {/* <div
             className={styles.cell}
             style={{
               borderRight: "1px solid #cccccc",
@@ -119,6 +117,22 @@ const SearchRoom = ({ data, setData }) => {
                 <span className={styles.title}>Check-Out</span>
                 <span>Fri, Mar 15, 2024</span>
               </div>
+            </div>
+          </div> */}
+          <div className={styles.container_date}>
+            <div className={styles.date}>
+              <DateRangePicker
+                format="dd/MM/yyyy"
+                character=" – "
+                size="lg"
+                editable={false}
+                caretAs={IoMdCalendar}
+                label="Check-in - Check-out: "
+                showHeader={false}
+                block
+                ranges={[]}
+                onOk={hello}
+              />
             </div>
           </div>
         </div>

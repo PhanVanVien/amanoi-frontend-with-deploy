@@ -12,6 +12,8 @@ import { IoArrowUp } from "react-icons/io5";
 import AdminDashboard from "./components/Admin/AdminDashboard";
 import Reserve from "./components/Reserve/Reserve/Reserve";
 import ModifyReservation from "./components/Reserve/ModifyReservation/ModifyReservation";
+import { DateRangePicker } from "rsuite";
+import { IoMdCalendar } from "react-icons/io";
 
 function App() {
   const scrollToTop = () => {
@@ -25,6 +27,7 @@ function App() {
     <div className="container">
       <Header />
       <Nav />
+
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/gallery" element={<Gallery title="Explore Amanoi" />} />
