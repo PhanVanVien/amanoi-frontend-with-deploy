@@ -49,12 +49,6 @@ const ModifyReservation = () => {
         setReservation(null);
         toast.error(error.message);
       }
-      // finally {
-      //   window.scrollTo({
-      //     top: document.body.scrollHeight,
-      //     behavior: "smooth",
-      //   });
-      // }
     }
     if (showEmail === true && email !== "") {
       try {
@@ -65,12 +59,6 @@ const ModifyReservation = () => {
         setReservation(null);
         toast.error(error.message);
       }
-      // finally {
-      //   window.scrollTo({
-      //     top: document.body.scrollHeight,
-      //     behavior: "smooth",
-      //   });
-      // }
     }
   };
 

@@ -19,7 +19,7 @@ const Modal = ({ isModalOpen, onClose, onSubmit, title, room, isEditing }) => {
     view: "",
     details: "",
     adult: 0,
-    children: 0,
+    child: 0,
   });
 
   const [roomData, setRoomData] = useState({
@@ -31,7 +31,7 @@ const Modal = ({ isModalOpen, onClose, onSubmit, title, room, isEditing }) => {
     view: "",
     details: "",
     adult: 0,
-    children: 0,
+    child: 0,
   });
 
   const [types, setTypes] = useState([]);
@@ -233,16 +233,16 @@ const Modal = ({ isModalOpen, onClose, onSubmit, title, room, isEditing }) => {
                 </div>
               </div>
               <div className={styles.input__group}>
-                <label htmlFor="children" className={styles.label}>
+                <label htmlFor="child" className={styles.label}>
                   Children
                 </label>
                 <div className={styles.icon_container}>
                   <input
-                    id="children"
+                    id="child"
                     type="number"
                     min={0}
                     className={styles.icon_input}
-                    value={roomData.children}
+                    value={roomData.child}
                     onChange={handleInputChange}
                   />
                   <div className={styles.icon}>

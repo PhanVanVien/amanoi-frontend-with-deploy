@@ -157,7 +157,7 @@ const ManageRooms = () => {
               <td>{item.type}</td>
               <td>{item.view}</td>
               <td>{item.adult}</td>
-              <td>{item.children}</td>
+              <td>{item.child}</td>
               <td>{item.price}</td>
               <td>{item.area}</td>
               <td style={{ display: "flex", justifyContent: "center" }}>

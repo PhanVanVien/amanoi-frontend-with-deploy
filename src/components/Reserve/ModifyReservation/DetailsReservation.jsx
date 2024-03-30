@@ -9,8 +9,8 @@ const DetailsReservation = ({ reservation }) => {
     dateCreated,
     email,
     phone,
-    adults,
-    children,
+    adult,
+    child,
     room: { name, type, view } = {},
     checkInDate,
     checkOutDate,
@@ -78,7 +78,7 @@ const DetailsReservation = ({ reservation }) => {
           </div>
           <div className={styles.content_group}>
             <span className={styles.label}>Adults:</span>
-            <span className={styles.text}>{adults}</span>
+            <span className={styles.text}>{adult}</span>
           </div>
         </div>
         <div className={styles.right_content}>
@@ -94,7 +94,7 @@ const DetailsReservation = ({ reservation }) => {
           </div>
           <div className={styles.content_group}>
             <span className={styles.label}>Children:</span>
-            <span className={styles.text}>{children}</span>
+            <span className={styles.text}>{child}</span>
           </div>
         </div>
       </div>

@@ -92,7 +92,7 @@ export async function addNewRoom(room) {
     formData.append("details", room.details);
     formData.append("view", room.view);
     formData.append("adult", room.adult);
-    formData.append("children", room.children);
+    formData.append("child", room.child);
 
     const response = await api.post(`/rooms/add/new-room`, formData);
 
@@ -118,7 +118,7 @@ export async function editRoom(id, room) {
     formData.append("details", room.details);
     formData.append("view", room.view);
     formData.append("adult", room.adult);
-    formData.append("children", room.children);
+    formData.append("child", room.child);
 
     const response = await api.put(`/rooms/update/${id}`, formData);
 
@@ -211,6 +211,45 @@ export async function getReservationByEmail(email) {
       return false;
     }
   } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+}
+
+export async function getMaxAdult() {
+  try {
+    const response = await api.get("/rooms/room/max-adult");
+    return response;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
+
+export async function getMaxChild() {
+  try {
+    const response = await api.get("/rooms/room/max-child");
+    return response;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
+
+export async function getAvailableRooms(
+  checkInDate,
+  checkOutDate,
+  adult,
+  child
+) {
+  try {
+    const response = await api.get(
+      `/rooms/available-rooms?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}&adult=${adult}&child=${child}`
+    );
+    if (response.status === 200) {
+      return response.data.data;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    console.log(error);
     throw new Error(error.response.data.message);
   }
 }

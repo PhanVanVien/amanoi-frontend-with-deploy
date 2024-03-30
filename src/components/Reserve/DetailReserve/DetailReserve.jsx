@@ -23,7 +23,8 @@ const DetailReserve = ({ data }) => {
           </div>
           <div>
             <div className={styles.hour}>
-              Thu, Mar 14, 2024 - Fri, Mar 15, 2024
+              {data.checkInDate.toDateString()} -{" "}
+              {data.checkOutDate.toDateString()}
             </div>
             <div className={styles.hour}>
               {data.adult} Adult, {data.child} Child
