@@ -4,6 +4,8 @@ import FilterRoom from "../FilterRoom/FilterRoom";
 import RoomItem from "../RoomItem/RoomItem";
 import DetailReserve from "../DetailReserve/DetailReserve";
 import SearchRoom from "../SearchRoom/SearchRoom";
+import { diff } from "../../Utils/diff";
+import InformationReservation from "../InformationReservation/InformationReservation";
 
 const Room = () => {
   const [data, setData] = useState({
@@ -19,9 +21,19 @@ const Room = () => {
 
   const [room, setRoom] = useState({});
 
-  const onClick = (item) => {
-    console.table(item);
-    setRoom(item);
+  const [openInformation, setOpenInformation] = useState(false);
+
+  const handleOpenInformation = () => {
+    setOpenInformation(!openInformation);
+  };
+
+  const onClick = (room) => {
+    setRoom(room);
+    handleOpenInformation(!openInformation);
+  };
+
+  const onClose = () => {
+    handleOpenInformation(!openInformation);
   };
 
   return (
@@ -29,9 +41,13 @@ const Room = () => {
       <div>
         <SearchRoom data={data} setData={setData} />
         <FilterRoom />
-        <RoomItem data={data} onClick={onClick} />
+        {openInformation ? (
+          <InformationReservation onClose={onClose} data={data} room={room} />
+        ) : (
+          <RoomItem data={data} onClick={onClick} />
+        )}
       </div>
-      <DetailReserve data={data} />
+      <DetailReserve data={data} room={room} setRoom={setRoom} />
     </div>
   );
 };

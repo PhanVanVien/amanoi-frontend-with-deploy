@@ -17,6 +17,7 @@ const ModifyReservation = () => {
   const [conf, setConf] = useState("");
   const [email, setEmail] = useState("");
   const [reservation, setReservation] = useState(null);
+  
   const goBack = () => {
     navigate(-1);
   };
@@ -36,7 +37,6 @@ const ModifyReservation = () => {
     if (id === "email") {
       setEmail(value);
     }
-    console.log(id, " ", value);
   };
 
   const getReservation = async () => {

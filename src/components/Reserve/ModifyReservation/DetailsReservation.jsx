@@ -122,7 +122,9 @@ const DetailsReservation = ({ reservation }) => {
       <div className={styles.content_group}>
         <span className={styles.label}>Number of Nights:</span>
         <span className={styles.text}>
-          {diff(checkInDate, checkOutDate)} days
+          {diff(checkInDate, checkOutDate) > 1
+            ? `${diff(checkInDate, checkOutDate)} days`
+            : `${diff(checkInDate, checkOutDate)} day`}
         </span>
       </div>
       <div className={styles.content_group}>

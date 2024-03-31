@@ -8,25 +8,43 @@ import {
   getAvailableRooms,
 } from "../../Utils/ApiFunctions";
 import { toast } from "react-toastify";
+import { formatDate } from "../../Utils/formatDate";
 const RoomItem = ({ data, onClick }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const [limit, setLimit] = useState(5);
   const baseUrl = "http://localhost:8080/rooms/images/";
   const [rooms, setRooms] = useState([]);
+  const [totalItems, setTotalItems] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
 
   useEffect(() => {
+    setCurrentPage(0);
     fetchData();
   }, [data]);
 
-  function formatDate(dateString) {
-    const date = new Date(dateString);
+  const handleSeeMore = () => {
+    setCurrentPage(currentPage + 1);
+    fetchMoreData();
+  };
 
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
+  const fetchMoreData = async () => {
+    try {
+      const response = await getAvailableRooms(
+        formatDate(data.checkInDate),
+        formatDate(data.checkOutDate),
+        data.adult,
+        data.child,
+        currentPage + 1,
+        limit
+      );
+      console.log(currentPage + 1);
+      setRooms((prev) => [...prev, ...response.data]);
 
-    return `${year}-${month}-${day}`;
-  }
+      setTotalPages(response.totalPages);
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
 
   const fetchData = async () => {
     try {
@@ -34,9 +52,13 @@ const RoomItem = ({ data, onClick }) => {
         formatDate(data.checkInDate),
         formatDate(data.checkOutDate),
         data.adult,
-        data.child
+        data.child,
+        0,
+        limit
       );
-      setRooms(response);
+      setRooms(response.data);
+
+      setTotalPages(response.totalPages);
     } catch (error) {
       toast.error(error.message);
     }
@@ -103,6 +125,11 @@ const RoomItem = ({ data, onClick }) => {
             </div>
           </div>
         ))}
+      {currentPage < totalPages - 1 && (
+        <div className={styles.seeMore_container}>
+          <CustomButton title={"See More"} onClick={() => handleSeeMore()} />
+        </div>
+      )}
     </>
   );
 };

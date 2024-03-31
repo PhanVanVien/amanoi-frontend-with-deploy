@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./DetailReserve.module.css";
 import { RiVipCrownLine } from "react-icons/ri";
 import { FaHandHolding } from "react-icons/fa";
 import { IoGlobeSharp } from "react-icons/io5";
 import { BsFillClockFill } from "react-icons/bs";
+import { diff } from "../../Utils/diff";
 
-const DetailReserve = ({ data }) => {
+const DetailReserve = ({ data, room }) => {
   return (
     <div>
       <div className={styles.form_reservation}>
@@ -30,10 +31,27 @@ const DetailReserve = ({ data }) => {
               {data.adult} Adult, {data.child} Child
             </div>
           </div>
+          {Object.keys(room).length !== 0 && (
+            <div>
+              <div className={styles.room_infor}>
+                <span className={styles.title_reservation}>{room.name}</span>
+              </div>
+              <div className={styles.add_infor}>
+                <div className={styles.infor}>
+                  <span>{room.type}</span> - {room.view}
+                </div>
+                <div className={styles.infor}>
+                  <span>${room.price}</span>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
         <div className={styles.total}>
           <span className={styles.total_title}>Total:</span>
-          <span className={styles.total_title}>$0.00</span>
+          <span className={styles.total_title}>
+            ${diff(data.checkInDate, data.checkOutDate) * room.price}
+          </span>
         </div>
         <div className={styles.information}>
           <span className={styles.title_reservation}>

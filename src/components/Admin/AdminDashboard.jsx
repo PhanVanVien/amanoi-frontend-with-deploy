@@ -9,11 +9,11 @@ import { IoIosArrowUp } from "react-icons/io";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 
 const AdminDashboard = () => {
-  const [manageRooms, setManageRooms] = useState(false);
   const [manageReservations, setManageReservations] = useState(true);
+  const [manageRooms, setManageRooms] = useState(false);
   const [manageGallery, setManageGallery] = useState(false);
   const [manageUsers, setManageUsers] = useState(false);
-  const [selectedSection, setSelectedSection] = useState("Rooms");
+  const [selectedSection, setSelectedSection] = useState("Reservation");
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -86,13 +86,13 @@ const AdminDashboard = () => {
             </button>
             {open && (
               <div className={styles.dropdown_content}>
-                <button onClick={() => handleManagementSelection("Rooms")}>
-                  Rooms
-                </button>
                 <button
                   onClick={() => handleManagementSelection("Reservations")}
                 >
                   Reservations
+                </button>
+                <button onClick={() => handleManagementSelection("Rooms")}>
+                  Rooms
                 </button>
                 <button onClick={() => handleManagementSelection("Gallery")}>
                   Gallery

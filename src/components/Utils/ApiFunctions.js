@@ -237,14 +237,57 @@ export async function getAvailableRooms(
   checkInDate,
   checkOutDate,
   adult,
-  child
+  child,
+  page,
+  limit
 ) {
   try {
     const response = await api.get(
-      `/rooms/available-rooms?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}&adult=${adult}&child=${child}`
+      `/rooms/available-rooms?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}&adult=${adult}&child=${child}&page=${page}&limit=${limit}`
     );
     if (response.status === 200) {
-      return response.data.data;
+      return response.data;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    console.log(error);
+    throw new Error(error.response.data.message);
+  }
+}
+
+export async function reserve(infor, room, data) {
+  try {
+    // const formData = new FormData();
+    // formData.append("checkInDate", data.checkInDate);
+    // formData.append("checkOutDate", data.checkOutDate);
+    // formData.append("adult", data.adult);
+    // formData.append("child", data.child);
+    // formData.append("prefix", infor.prefix);
+    // formData.append("lastName", infor.lastName);
+    // formData.append("firstName", infor.firstName);
+    // formData.append("email", infor.email);
+    // formData.append("phone", infor.phone);
+    // formData.append("specialRequests", infor.specialRequests);
+    const reservation = {
+      checkInDate: data.checkInDate,
+      checkOutDate: data.checkOutDate,
+      adult: data.adult,
+      child: data.child,
+      prefix: infor.prefix,
+      lastName: infor.lastName,
+      firstName: infor.firstName,
+      email: infor.email,
+      phone: infor.phone,
+      specialRequests: infor.specialRequests,
+    };
+    const response = await api.post(
+      `/reservations/room/reservation?roomId=${room.roomId}`,
+      reservation
+    );
+
+    if (response.status === 200) {
+      return response;
     } else {
       return false;
     }
