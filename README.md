@@ -1,2 +1,2 @@
 This project is a practical exercise I completed while learning HTML, CSS, JS, and ReactJS. I cloned a website frontend. You can see on:
-[Amanoi](frontend-mauve-sigma.vercel.app) 
+[Amanoi]((https://frontend-mauve-sigma.vercel.app/)) 
